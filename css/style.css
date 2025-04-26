@@ -1,0 +1,20 @@
+/* css/style.css - Main Importer */
+
+/* 1. Base styles, variables, resets */
+@import url('base.css');
+
+/* 2. Layout structure (header, main grid, sidebar, footer) */
+@import url('layout.css');
+
+/* 3. Components */
+@import url('components/buttons.css');
+@import url('components/sidebar.css');
+@import url('components/tabs.css');
+@import url('components/market.css');
+@import url('components/modules.css');
+@import url('components/community.css');
+@import url('components/tools.css');
+@import url('components/growth-path.css');
+
+/* 4. Utilities (if any in future) */
+/* @import url('utilities.css'); */
