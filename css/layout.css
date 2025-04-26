@@ -1,4 +1,4 @@
-/* --- START OF DEBUG css/layout.css --- */
+/* --- START OF CLEAN css/layout.css --- */
 
 /* Header Pagina Community */
 header:not(.toolbar) {
@@ -8,29 +8,12 @@ header:not(.toolbar) {
 header:not(.toolbar) .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
 header:not(.toolbar) .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 0.75rem;}
 header:not(.toolbar) .logo span { color: var(--accent); }
-
-/* ============================================================ */
-/* === SEZIONE DI DEBUG PER IMMAGINE LOGO PAGINA COMMUNITY === */
-/* ============================================================ */
-/* Abbiamo semplificato il selettore e aggiunto !important + stili vistosi */
-img.header-logo-img {
-    height: 50px !important;      /* Altezza forzata e aumentata per test */
-    width: auto !important;       /* Larghezza auto forzata */
-    border: 5px solid red !important; /* BORDO ROSSO VISTOSO */
-    background-color: yellow !important; /* SFONDO GIALLO VISTOSO */
-    display: inline-block !important; /* Assicura comportamento corretto */
+/* Stile IMMAGINE logo header community */
+header:not(.toolbar) .logo img.header-logo-img {
+    height: 35px;      /* <<=== Altezza corretta */
+    width: auto;
     vertical-align: middle;
-    max-width: 100% !important; /* Previene overflow se contenitore è piccolo */
-    box-sizing: border-box !important; /* Include bordo nel calcolo */
-    outline: 3px dashed lime !important; /* CONTORNO VERDE AGGIUNTIVO */
-    opacity: 1 !important; /* Assicura visibilità */
-    transform: none !important; /* Resetta eventuali trasformazioni */
-    position: static !important; /* Resetta posizionamento */
-    margin: 10px !important; /* Aggiunge margine vistoso */
 }
-/* ============================================================ */
-/* ============================================================ */
-
 header:not(.toolbar) nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
 header:not(.toolbar) nav ul li { margin-left: 1.5rem; }
 header:not(.toolbar) nav ul li a { color: var(--text-light); text-decoration: none; transition: color 0.3s ease; }
@@ -45,6 +28,7 @@ header.toolbar {
 }
 header.toolbar .toolbar-left { display: flex; align-items: center; }
 header.toolbar .toolbar-logo { margin-right: 25px; display: flex; align-items: center; height: 100%; gap: 0.75rem; }
+/* Stile IMMAGINE logo header toolbar */
 header.toolbar .toolbar-logo img { display: block; max-height: 35px; height: 35px; width: auto; vertical-align: middle; }
 header.toolbar .toolbar-logo .logo-text { color: var(--text-light); font-weight: bold; font-size: 1.2rem; }
 header.toolbar .login-tools { display: flex; align-items: center; gap: 10px; }
@@ -120,4 +104,4 @@ footer { background-color: var(--primary); color: var(--text-light); padding: 3r
      header.toolbar .token-balance { display: none !important; }
 }
 
-/* --- END OF DEBUG css/layout.css --- */
+/* --- END OF CLEAN css/layout.css --- */
