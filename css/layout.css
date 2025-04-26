@@ -1,40 +1,36 @@
-/* --- START OF FILE css/layout.css --- */
+/* --- START OF DEBUG css/layout.css --- */
 
 /* Header Pagina Community */
-header:not(.toolbar) { /* Selettore per header pagina community */
-    background-color: var(--primary); /* Colore primario definito in base.css */
-    color: var(--text-light); /* Colore testo chiaro definito in base.css */
-    padding: 1rem 2rem;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+header:not(.toolbar) {
+    background-color: var(--primary); color: var(--text-light); padding: 1rem 2rem;
+    position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-header:not(.toolbar) .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px; /* Larghezza massima layout */
-    margin: 0 auto; /* Centra */
-}
-header:not(.toolbar) .logo { /* Stile link logo */
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--text-light); /* Colore testo logo */
-    text-decoration: none;
-    display: flex; /* Per allineare immagine e testo */
-    align-items: center;
-    gap: 0.75rem; /* Spazio tra immagine e testo */
-}
-header:not(.toolbar) .logo span { /* Parte "Growth" */
-    color: var(--accent); /* Colore accento definito in base.css */
-}
-/* Stile IMMAGINE logo header community */
-header:not(.toolbar) .logo img.header-logo-img {
-    height: 35px; /* <<=== ALTEZZA LOGO */
-    width: auto;
+header:not(.toolbar) .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+header:not(.toolbar) .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 0.75rem;}
+header:not(.toolbar) .logo span { color: var(--accent); }
+
+/* ============================================================ */
+/* === SEZIONE DI DEBUG PER IMMAGINE LOGO PAGINA COMMUNITY === */
+/* ============================================================ */
+/* Abbiamo semplificato il selettore e aggiunto !important + stili vistosi */
+img.header-logo-img {
+    height: 50px !important;      /* Altezza forzata e aumentata per test */
+    width: auto !important;       /* Larghezza auto forzata */
+    border: 5px solid red !important; /* BORDO ROSSO VISTOSO */
+    background-color: yellow !important; /* SFONDO GIALLO VISTOSO */
+    display: inline-block !important; /* Assicura comportamento corretto */
     vertical-align: middle;
+    max-width: 100% !important; /* Previene overflow se contenitore è piccolo */
+    box-sizing: border-box !important; /* Include bordo nel calcolo */
+    outline: 3px dashed lime !important; /* CONTORNO VERDE AGGIUNTIVO */
+    opacity: 1 !important; /* Assicura visibilità */
+    transform: none !important; /* Resetta eventuali trasformazioni */
+    position: static !important; /* Resetta posizionamento */
+    margin: 10px !important; /* Aggiunge margine vistoso */
 }
+/* ============================================================ */
+/* ============================================================ */
+
 header:not(.toolbar) nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
 header:not(.toolbar) nav ul li { margin-left: 1.5rem; }
 header:not(.toolbar) nav ul li a { color: var(--text-light); text-decoration: none; transition: color 0.3s ease; }
@@ -43,39 +39,14 @@ header:not(.toolbar) .user-actions { display: flex; gap: 1rem; align-items: cent
 
 /* Header Pagine Contenuto (Toolbar) */
 header.toolbar {
-    background-color: var(--primary); /* Usa le stesse variabili */
-    color: var(--text-light);
-    padding: 0 20px;
-    height: 60px; /* Altezza fissa toolbar */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000; /* Un po' più alto della nav sotto? */
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    background-color: var(--primary); color: var(--text-light); padding: 0 20px;
+    height: 60px; display: flex; justify-content: space-between; align-items: center;
+    position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 header.toolbar .toolbar-left { display: flex; align-items: center; }
-header.toolbar .toolbar-logo { /* Contenitore logo e testo */
-    margin-right: 25px;
-    display: flex;
-    align-items: center;
-    height: 100%;
-    gap: 0.75rem; /* Spazio tra immagine e testo */
-}
-/* Stile IMMAGINE logo header toolbar */
-header.toolbar .toolbar-logo img {
-    display: block;
-    max-height: calc(60px - 25px); /* Calcola altezza max basata su header height */
-    height: 35px; /* O imposta altezza fissa come l'altro logo */
-    width: auto;
-    vertical-align: middle;
-}
-header.toolbar .toolbar-logo .logo-text { /* Testo accanto al logo */
-    color: var(--text-light);
-    font-weight: bold;
-    font-size: 1.2rem;
-}
+header.toolbar .toolbar-logo { margin-right: 25px; display: flex; align-items: center; height: 100%; gap: 0.75rem; }
+header.toolbar .toolbar-logo img { display: block; max-height: 35px; height: 35px; width: auto; vertical-align: middle; }
+header.toolbar .toolbar-logo .logo-text { color: var(--text-light); font-weight: bold; font-size: 1.2rem; }
 header.toolbar .login-tools { display: flex; align-items: center; gap: 10px; }
 header.toolbar .token-balance { background-color: rgba(255, 255, 255, 0.1); border-radius: 4px; padding: 6px 12px; font-weight: bold; font-size: 0.9rem; display: none; align-items: center; }
 header.toolbar .token-icon { color: #facc15; margin-right: 5px; }
@@ -84,60 +55,32 @@ header.toolbar #username-display { margin-right: 15px; }
 
 /* Navigazione Pagine Contenuto */
 nav#main-nav {
-    background-color: var(--card-bg); /* Usa variabile per sfondo card */
-    padding: 0 20px;
-    height: 45px; /* Altezza fissa nav */
-    position: sticky;
-    top: 60px; /* Si attacca sotto la toolbar */
-    z-index: 999;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    border-bottom: 1px solid var(--border); /* Usa variabile bordo */
-    display: flex;
-    justify-content: center;
+    background-color: var(--card-bg); padding: 0 20px; height: 45px; position: sticky; top: 60px;
+    z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.08); border-bottom: 1px solid var(--border);
+    display: flex; justify-content: center;
 }
 nav#main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; align-items: center; height: 100%; gap: 5px; }
-nav#main-nav ul li a {
-    text-decoration: none; color: var(--secondary); font-weight: 600; padding: 10px 15px;
-    border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-size: 0.95rem;
-    display: block; line-height: calc(45px - 20px); /* Altezza nav - (padding * 2) */
-}
+nav#main-nav ul li a { text-decoration: none; color: var(--secondary); font-weight: 600; padding: 10px 15px; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-size: 0.95rem; display: block; line-height: calc(45px - 20px); }
 nav#main-nav ul li a:hover, nav#main-nav ul li a.active { background-color: var(--secondary); color: var(--text-light); }
 
 /* Layout Griglia Pagina Community */
-main:not(.container) { /* Selettore per main pagina community */
-    max-width: 1400px; margin: 2rem auto; padding: 0 1rem;
-    display: grid; grid-template-columns: 280px 1fr; gap: 2rem;
-}
-main:not(.container) aside.sidebar {
-    background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    padding: 1.5rem; position: sticky; top: calc(1rem + 64px); /* Altezza header community + spazio */
-    height: fit-content; max-height: calc(100vh - 8rem); overflow-y: auto;
-}
+main:not(.container) { max-width: 1400px; margin: 2rem auto; padding: 0 1rem; display: grid; grid-template-columns: 280px 1fr; gap: 2rem; }
+main:not(.container) aside.sidebar { background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); padding: 1.5rem; position: sticky; top: calc(1rem + 64px); height: fit-content; max-height: calc(100vh - 8rem); overflow-y: auto; }
 main:not(.container) .main-content { display: flex; flex-direction: column; gap: 2rem; }
 
 /* Layout Pagine Contenuto */
-main.container {
-    /* .container definito in base.css, ma potremmo aggiungere stili specifici per main.container se necessario */
-}
 main.container section { padding: 0 0 2rem 0; border-bottom: 1px solid var(--border); }
 main.container section:last-of-type { border-bottom: none; padding-bottom: 1rem; }
-/* Stili H2/H3 specifici per pagine contenuto (spostati da base.css per chiarezza) */
-main.container h2 {
-    color: var(--primary); border-bottom: 3px solid var(--secondary); padding-bottom: 0.6rem;
-    margin: 3rem 0 1.8rem 0; font-size: 2rem; display: flex; align-items: center;
-}
+main.container h2 { color: var(--primary); border-bottom: 3px solid var(--secondary); padding-bottom: 0.6rem; margin: 3rem 0 1.8rem 0; font-size: 2rem; display: flex; align-items: center; }
 main.container h2:first-of-type { margin-top: 0; }
 main.container h2 i { margin-right: 12px; color: var(--secondary); font-size: 1.8rem; }
 main.container h3 { color: var(--secondary); font-size: 1.5rem; margin: 2rem 0 1rem 0; }
 
-/* Titolo Sezione (Comune per pagina community) */
-.section-title {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
-}
-.section-title h2 { margin: 0; border: none; padding: 0; font-size: 1.5rem; /* Override stile h2 precedente */ }
+/* Titolo Sezione */
+.section-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+.section-title h2 { margin: 0; border: none; padding: 0; font-size: 1.5rem; }
 
-/* Footer (Comune) */
+/* Footer */
 footer { background-color: var(--primary); color: var(--text-light); padding: 3rem 1rem; margin-top: 3rem; }
 .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
 .footer-col h3 { font-size: 1.2rem; margin-bottom: 1.5rem; color: white; }
@@ -165,7 +108,7 @@ footer { background-color: var(--primary); color: var(--text-light); padding: 3r
     header.toolbar .toolbar-logo img { max-height: 30px; }
     header.toolbar .toolbar-logo .logo-text { font-size: 1rem; }
 
-    nav#main-nav { top: auto; /* La nav non sarà più sticky sotto la toolbar su mobile? */ }
+    nav#main-nav { top: auto; }
     nav#main-nav ul { justify-content: center; overflow-x: auto; gap: 5px; }
     nav#main-nav ul li a { padding: 6px 10px; font-size: 0.9rem; }
 
@@ -173,13 +116,8 @@ footer { background-color: var(--primary); color: var(--text-light); padding: 3r
     main.container h2 { font-size: 1.7rem; margin-top: 2.5rem;}
     main.container h2 i { font-size: 1.5rem; }
 }
-
-/* Nasconde logo immagine su schermi extra piccoli se necessario */
 @media (max-width: 480px) {
-    header:not(.toolbar) .logo img.header-logo-img {
-        /* display: none; */ /* Decommenta per nascondere */
-    }
      header.toolbar .token-balance { display: none !important; }
 }
 
-/* --- END OF FILE css/layout.css --- */
+/* --- END OF DEBUG css/layout.css --- */
