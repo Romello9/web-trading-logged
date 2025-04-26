@@ -51,3 +51,22 @@ footer { background-color: var(--primary); color: var(--text-light); padding: 3r
     .user-actions { margin-top: 1rem; justify-content: center; }
     main { padding: 1rem; margin-top: 1rem; }
 }
+/* Stili aggiuntivi per il logo nell'header della pagina community */
+header .logo { /* Assicura che sia flex e aggiunge spazio */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Spazio tra immagine e testo */
+}
+
+header .logo .header-logo-img {
+    height: 35px; /* Altezza del logo immagine, regola se necessario */
+    width: auto;
+    vertical-align: middle; /* Buona pratica */
+}
+
+/* Nasconde l'immagine logo su schermi molto piccoli se diventa troppo affollato (opzionale) */
+@media (max-width: 480px) {
+    header .logo .header-logo-img {
+        /* display: none; */ /* Decommenta se vuoi nasconderlo */
+    }
+}
