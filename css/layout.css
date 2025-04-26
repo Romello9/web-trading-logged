@@ -51,22 +51,30 @@ footer { background-color: var(--primary); color: var(--text-light); padding: 3r
     .user-actions { margin-top: 1rem; justify-content: center; }
     main { padding: 1rem; margin-top: 1rem; }
 }
-/* Stili aggiuntivi per il logo nell'header della pagina community */
-header .logo { /* Assicura che sia flex e aggiunge spazio */
+/* Stili logo per header (dovrebbero funzionare per entrambi gli header) */
+header .logo, header.toolbar .toolbar-logo {
     display: flex;
     align-items: center;
     gap: 0.75rem; /* Spazio tra immagine e testo */
+    text-decoration: none; /* Assicura che il link logo non sia sottolineato */
 }
 
-header .logo .header-logo-img {
-    height: 35px; /* Altezza del logo immagine, regola se necessario */
+/* Stile specifico immagine logo */
+header .logo .header-logo-img, header.toolbar .toolbar-logo img {
+    height: 35px; /* Regola altezza comune */
     width: auto;
-    vertical-align: middle; /* Buona pratica */
+    vertical-align: middle;
 }
 
-/* Nasconde l'immagine logo su schermi molto piccoli se diventa troppo affollato (opzionale) */
-@media (max-width: 480px) {
-    header .logo .header-logo-img {
-        /* display: none; */ /* Decommenta se vuoi nasconderlo */
-    }
+/* Stile testo logo pagina community */
+header .logo span { /* La parte "Growth" */
+    color: var(--accent);
+}
+
+/* Stile testo logo pagina contenuti (se si vuole diverso) */
+header.toolbar .toolbar-logo .logo-text {
+    color: var(--light-text);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
 }
