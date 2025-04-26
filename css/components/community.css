@@ -3,15 +3,12 @@
 .discussion-list { display: flex; flex-direction: column; gap: 1rem; }
 .discussion-card { display: flex; gap: 1rem; padding: 1rem; border-radius: 8px; background-color: var(--light-bg); transition: transform 0.3s ease, background-color 0.3s ease; }
 .discussion-card:hover { transform: translateX(5px); background-color: #e5e7eb; }
-.discussion-avatar {
-    width: 48px; height: 48px; border-radius: 50%; background-color: var(--secondary);
-    display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; flex-shrink: 0;
-}
+.discussion-avatar { width: 48px; height: 48px; border-radius: 50%; background-color: var(--secondary); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; flex-shrink: 0; }
 .discussion-content { flex: 1; }
 .discussion-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem; flex-wrap: wrap; gap: 0.5rem;}
 .discussion-author { font-weight: 600; color: var(--primary); }
 .discussion-time { color: var(--text-muted); font-size: 0.8rem; }
-.discussion-body p { margin-bottom: 0.75rem; font-size: 0.95rem; }
+.discussion-body p { margin-bottom: 0.75rem; font-size: 0.95rem; line-height: 1.5; }
 .discussion-footer { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.75rem; }
 .discussion-action { display: flex; align-items: center; gap: 0.35rem; color: var(--text-muted); font-size: 0.875rem; cursor: pointer; }
 .discussion-action:hover { color: var(--secondary); }

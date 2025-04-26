@@ -1,12 +1,60 @@
 /* css/components/buttons.css */
+/* Stile Base Pulsante */
 .btn {
     padding: 0.5rem 1rem; border-radius: 4px; font-weight: 500;
     text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none;
     display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+    font-size: 0.9rem; /* Dimensione comune */
 }
-.btn-primary { background-color: var(--accent); color: white; }
-.btn-outline { background-color: transparent; color: white; border: 1px solid white; }
-.btn-primary:hover { background-color: #9333ea; } /* Darker accent */
-.btn-outline:hover { background-color: rgba(255, 255, 255, 0.1); }
 
-.wallet-btn svg { width: 16px; height: 16px; fill: currentColor; }
+/* Pulsanti Header Pagina Community */
+header:not(.toolbar) .btn-primary { background-color: var(--accent); color: white; }
+header:not(.toolbar) .btn-outline { background-color: transparent; color: white; border: 1px solid white; }
+header:not(.toolbar) .btn-primary:hover { background-color: #9333ea; }
+header:not(.toolbar) .btn-outline:hover { background-color: rgba(255, 255, 255, 0.1); }
+header:not(.toolbar) .wallet-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+/* Pulsanti Header Pagine Contenuto (Toolbar) */
+header.toolbar .login-button,
+header.toolbar .signup-button,
+header.toolbar .wallet-button,
+header.toolbar #logout-btn {
+    border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer;
+    font-weight: 600; transition: all 0.3s ease; font-size: 0.9rem;
+}
+header.toolbar .login-button { background-color: transparent; color: var(--text-light); border: 1px solid var(--text-light); }
+header.toolbar .login-button:hover { background-color: rgba(255, 255, 255, 0.1); }
+header.toolbar .signup-button { background-color: var(--accent); color: var(--text-light); border: 1px solid var(--accent); }
+header.toolbar .signup-button:hover { background-color: #9333ea; border-color: #9333ea;}
+header.toolbar .wallet-button { background-color: var(--success); color: var(--text-light); display: flex; align-items: center; border: 1px solid var(--success); }
+header.toolbar .wallet-button:hover { background-color: #059669; border-color: #059669;}
+header.toolbar .wallet-button i { margin-right: 6px; }
+header.toolbar #logout-btn { border-color: var(--danger); color: var(--danger); background-color: transparent;}
+header.toolbar #logout-btn:hover { background-color: rgba(239, 68, 68, 0.1); }
+
+/* Pulsanti Moduli */
+.form-button {
+    width: 100%; padding: 12px; border: none; border-radius: 4px; cursor: pointer;
+    font-weight: 600; margin-top: 10px; font-size: 1rem; transition: background-color 0.3s;
+}
+.form-button.primary-button { background-color: var(--secondary); color: var(--text-light); }
+.form-button.primary-button:hover { background-color: var(--primary); }
+.form-button.success-button { background-color: var(--success); color: var(--text-light); }
+.form-button.success-button:hover { background-color: #059669; }
+.form-button.danger-button { background-color: var(--danger); color: var(--text-light); }
+.form-button.danger-button:hover { background-color: #dc2626; }
+
+/* Link Sfide (Componente specifico pagine contenuto) */
+.resource-link.challenge-link {
+    font-weight: bold; display: inline-block; margin-top: 0.5rem; padding: 5px 10px;
+    border: 1px solid var(--secondary); border-radius: 4px; background-color: var(--card-bg);
+    color: var(--secondary); transition: background-color 0.2s, color 0.2s; font-size: 0.85rem;
+}
+.resource-link.challenge-link:hover { background-color: var(--secondary); color: var(--text-light); text-decoration: none; }
+.resource-link.challenge-link.completed { background-color: var(--success); border-color: var(--success); color: white; opacity: 0.7; cursor: default; pointer-events: none; }
+.resource-link.challenge-link.completed:hover { background-color: var(--success); color: white; }
+
+/* Responsive Buttons Toolbar Contenuti */
+@media (max-width: 768px) {
+    header.toolbar .login-button, header.toolbar .signup-button, header.toolbar .wallet-button, header.toolbar #logout-btn { padding: 6px 10px; font-size: 0.85rem; }
+}

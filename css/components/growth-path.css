@@ -1,30 +1,25 @@
 /* css/components/growth-path.css */
 .growth-path { background-color: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); padding: 1.5rem; }
-.milestones { position: relative; padding-left: 30px; margin-top: 1.5rem; border-left: 2px solid var(--border); }
-.milestone { position: relative; margin-bottom: 2rem; padding-left: 15px; }
+.milestones { position: relative; padding-left: 20px; margin-top: 1.5rem; border-left: 2px solid var(--border); }
+.milestone { position: relative; margin-bottom: 2rem; padding-left: 25px; /* Spazio dal punto */ }
 .milestone:last-child { margin-bottom: 0; }
 .milestone::before { /* Dot */
-    content: ""; position: absolute; left: -39px; /* Adjust to center on the border */ top: 0;
+    content: ""; position: absolute; left: -9px; /* Centrato sulla linea */ top: 4px; /* Allineato verticalmente al testo */
     width: 16px; height: 16px; background-color: white; border: 3px solid var(--secondary);
     border-radius: 50%; z-index: 1;
 }
-.milestone::after { /* Connector line - handled by border-left on .milestones now */
-    /* content: ""; position: absolute; left: -30px; top: 20px; bottom: -2rem; width: 2px; background-color: var(--border); */
-    /* Removed after as border on parent is cleaner */
-}
-/* Last milestone doesn't need a line extending below */
-/* .milestone:last-child::after { display: none; } */
+/* Linea gestita dal parent .milestones */
 
-.milestone-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem; }
-.milestone-title { font-weight: 600; font-size: 1.05rem; }
-.milestone-status { font-size: 0.8rem; font-weight: 500; padding: 0.15rem 0.4rem; border-radius: 4px; }
-.status-completed { background-color: rgba(16, 185, 129, 0.1); color: var(--success); }
-.status-inprogress { background-color: rgba(245, 158, 11, 0.1); color: var(--warning); }
+.milestone-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.25rem; flex-wrap: wrap; gap: 0.5rem; }
+.milestone-title { font-weight: 600; font-size: 1.05rem; line-height: 1.4; }
+.milestone-status { font-size: 0.75rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 12px; white-space: nowrap; }
+.status-completed { background-color: var(--success); color: white; }
+.status-inprogress { background-color: var(--warning); color: white; }
 .status-locked { background-color: var(--light-bg); color: var(--text-muted); }
 
 .milestone-subtitle { color: var(--text-muted); margin-bottom: 0.75rem; font-size: 0.9rem; }
-.milestone-description p { font-size: 0.9rem; margin-bottom: 0.5rem; }
+.milestone-description p { font-size: 0.9rem; margin-bottom: 0.5rem; line-height: 1.5; }
 
 /* Completed State */
 .milestone-completed::before { border-color: var(--success); background-color: var(--success); }
-.milestone-completed .milestone-title { color: var(--success); }
+/* .milestone-completed .milestone-title { color: var(--success); } */ /* Già gestito da status badge? */

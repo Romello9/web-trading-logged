@@ -1,38 +1,88 @@
 /* css/layout.css */
-header {
+
+/* Header Pagina Community */
+header:not(.toolbar) { /* Selettore per distinguere dall'header delle pagine contenuto */
     background-color: var(--primary); color: white; padding: 1rem 2rem;
     position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-.header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
-.logo { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; display: flex; align-items: center; }
-.logo span { color: var(--accent); }
-nav ul { display: flex; list-style: none; }
-nav ul li { margin-left: 1.5rem; }
-nav ul li a { color: white; text-decoration: none; transition: color 0.3s ease; }
-nav ul li a:hover { color: var(--accent); }
-.user-actions { display: flex; gap: 1rem; align-items: center; }
+header:not(.toolbar) .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto; }
+header:not(.toolbar) .logo { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; display: flex; align-items: center; gap: 0.75rem;}
+header:not(.toolbar) .logo span { color: var(--accent); }
+header:not(.toolbar) .logo img.header-logo-img { height: 35px; width: auto; vertical-align: middle; }
+header:not(.toolbar) nav ul { display: flex; list-style: none; }
+header:not(.toolbar) nav ul li { margin-left: 1.5rem; }
+header:not(.toolbar) nav ul li a { color: white; text-decoration: none; transition: color 0.3s ease; }
+header:not(.toolbar) nav ul li a:hover { color: var(--accent); }
+header:not(.toolbar) .user-actions { display: flex; gap: 1rem; align-items: center; }
 
-main {
+/* Header Pagine Contenuto (Toolbar) */
+header.toolbar {
+    background-color: var(--primary); color: var(--text-light); padding: 0 20px;
+    height: var(--header-height); /* Usa variabile root se necessario */ display: flex;
+    justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+header.toolbar .toolbar-left { display: flex; align-items: center; }
+header.toolbar .toolbar-logo { margin-right: 25px; display: flex; align-items: center; height: 100%; gap: 0.75rem; }
+header.toolbar .toolbar-logo img { display: block; max-height: calc(var(--header-height) - 25px); width: auto; vertical-align: middle; }
+header.toolbar .toolbar-logo .logo-text { color: var(--text-light); font-weight: bold; font-size: 1.2rem; }
+header.toolbar .login-tools { display: flex; align-items: center; gap: 10px; }
+header.toolbar .token-balance { background-color: rgba(255, 255, 255, 0.1); border-radius: 4px; padding: 6px 12px; font-weight: bold; font-size: 0.9rem; display: none; align-items: center; }
+header.toolbar .token-icon { color: #facc15; margin-right: 5px; }
+header.toolbar #user-info { display: none; align-items: center; color: var(--text-light); font-weight: 600;}
+header.toolbar #username-display { margin-right: 15px; }
+
+/* Navigazione Pagine Contenuto */
+nav#main-nav {
+    background-color: var(--card-bg); padding: 0 20px; height: var(--nav-height);
+    position: sticky; top: var(--header-height); /* Si attacca sotto la toolbar */ z-index: 999;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08); border-bottom: 1px solid var(--border);
+    display: flex; justify-content: center;
+}
+nav#main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; align-items: center; height: 100%; gap: 5px; }
+nav#main-nav ul li a {
+    text-decoration: none; color: var(--secondary-color); font-weight: 600; padding: 10px 15px;
+    border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-size: 0.95rem;
+    display: block; line-height: calc(var(--nav-height) - 20px);
+}
+nav#main-nav ul li a:hover, nav#main-nav ul li a.active { background-color: var(--secondary); color: var(--text-light); }
+
+/* Layout Griglia Pagina Community */
+main:not(.container) { /* Selettore per distinguere dal main delle pagine contenuto */
     max-width: 1400px; margin: 2rem auto; padding: 0 1rem;
     display: grid; grid-template-columns: 280px 1fr; gap: 2rem;
 }
-aside.sidebar {
+main:not(.container) aside.sidebar {
     background-color: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    padding: 1.5rem; position: sticky; top: calc(1rem + 64px); /* Adjust based on header height */
+    padding: 1.5rem; position: sticky; top: calc(1rem + 64px); /* Altezza header community */
     height: fit-content; max-height: calc(100vh - 8rem); overflow-y: auto;
 }
-.main-content { display: flex; flex-direction: column; gap: 2rem; }
+main:not(.container) .main-content { display: flex; flex-direction: column; gap: 2rem; }
 
+/* Layout Pagine Contenuto */
+main.container section { padding: 0 0 2rem 0; border-bottom: 1px solid var(--border); }
+main.container section:last-of-type { border-bottom: none; padding-bottom: 1rem; }
+main.container h2 { /* Stile H2 specifico per pagine contenuto (diverso da pagina community) */
+    color: var(--primary); border-bottom: 3px solid var(--secondary); padding-bottom: 0.6rem;
+    margin: 3rem 0 1.8rem 0; font-size: 2rem; display: flex; align-items: center;
+}
+main.container h2:first-of-type { margin-top: 0; }
+main.container h2 i { margin-right: 12px; color: var(--secondary); font-size: 1.8rem; }
+main.container h3 { color: var(--secondary); font-size: 1.5rem; margin: 2rem 0 1rem 0; }
+
+
+/* Titolo Sezione (Comune?) */
 .section-title {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
 }
-.section-title h2 { margin: 0; }
+.section-title h2 { margin: 0; border: none; padding: 0; } /* Resetta stile H2 dentro section-title */
 
+/* Footer (Comune) */
 footer { background-color: var(--primary); color: var(--text-light); padding: 3rem 1rem; margin-top: 3rem; }
 .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
 .footer-col h3 { font-size: 1.2rem; margin-bottom: 1.5rem; color: white; }
-.footer-links { list-style: none; }
+.footer-links { list-style: none; padding: 0; }
 .footer-links li { margin-bottom: 0.75rem; }
 .footer-links a { color: #e2e8f0; text-decoration: none; transition: color 0.3s ease; }
 .footer-links a:hover { color: var(--accent); }
@@ -40,41 +90,26 @@ footer { background-color: var(--primary); color: var(--text-light); padding: 3r
 
 /* Responsive Layout */
 @media (max-width: 1024px) {
-    main { grid-template-columns: 1fr; }
-    aside.sidebar { position: static; margin-bottom: 2rem; max-height: none; overflow-y: visible; }
+    main:not(.container) { grid-template-columns: 1fr; }
+    main:not(.container) aside.sidebar { position: static; margin-bottom: 2rem; max-height: none; overflow-y: visible; }
 }
 @media (max-width: 768px) {
-    header { padding: 1rem; }
-    .header-container { flex-direction: column; gap: 1rem; padding: 0; }
-    nav ul { margin-top: 1rem; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1rem; }
-    nav ul li { margin-left: 0; }
-    .user-actions { margin-top: 1rem; justify-content: center; }
-    main { padding: 1rem; margin-top: 1rem; }
-}
-/* Stili logo per header (dovrebbero funzionare per entrambi gli header) */
-header .logo, header.toolbar .toolbar-logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem; /* Spazio tra immagine e testo */
-    text-decoration: none; /* Assicura che il link logo non sia sottolineato */
-}
+    header:not(.toolbar) { padding: 1rem; }
+    header:not(.toolbar) .header-container { flex-direction: column; gap: 1rem; padding: 0; }
+    header:not(.toolbar) nav ul { margin-top: 1rem; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1rem; }
+    header:not(.toolbar) nav ul li { margin-left: 0; }
+    header:not(.toolbar) .user-actions { margin-top: 1rem; justify-content: center; }
 
-/* Stile specifico immagine logo */
-header .logo .header-logo-img, header.toolbar .toolbar-logo img {
-    height: 35px; /* Regola altezza comune */
-    width: auto;
-    vertical-align: middle;
-}
+    header.toolbar { height: auto; padding: 0.75rem 1rem; }
+    header.toolbar .login-tools { flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
+    header.toolbar .toolbar-logo { margin-right: 10px; gap: 0.5rem;}
+    header.toolbar .toolbar-logo img { max-height: 30px; }
+    header.toolbar .toolbar-logo .logo-text { font-size: 1rem; }
 
-/* Stile testo logo pagina community */
-header .logo span { /* La parte "Growth" */
-    color: var(--accent);
-}
+    nav#main-nav ul { justify-content: center; overflow-x: auto; gap: 5px; }
+    nav#main-nav ul li a { padding: 6px 10px; font-size: 0.9rem; }
 
-/* Stile testo logo pagina contenuti (se si vuole diverso) */
-header.toolbar .toolbar-logo .logo-text {
-    color: var(--light-text);
-    font-weight: bold;
-    font-size: 1.2rem;
-}
+    main { margin-top: 1rem; }
+    main.container h2 { font-size: 1.7rem; margin-top: 2.5rem;}
+    main.container h2 i { font-size: 1.5rem; }
 }
