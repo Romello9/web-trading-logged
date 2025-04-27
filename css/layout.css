@@ -1,38 +1,57 @@
 /* --- START OF css/layout.css --- */
 
-/* Header Pagina Community */
-header:not(.toolbar) {
-    background-color: var(--primary); /* Sfondo viola scuro per tutto l'header */
-    color: var(--text-light);
+/* ======================================== */
+/* Header Pagina Community (trading-community-page.html) */
+/* ======================================== */
+header { /* Applica a QUALSIASI header che NON ha la classe .toolbar */
+    background-color: var(--primary) !important; /* FORZA SFONDO VIOLA */
+    color: var(--text-light) !important; /* FORZA TESTO BIANCO DI DEFAULT PER FIGLI */
     padding: 1rem 2rem;
     position: sticky; top: 0; z-index: 100;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
-header:not(.toolbar) .header-container {
+header .header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
 }
-header:not(.toolbar) .logo {
-    font-size: 1.5rem; font-weight: bold; color: var(--text-light);
+header .logo {
+    font-size: 1.5rem; font-weight: bold;
+    color: var(--text-light) !important; /* FORZA TESTO LOGO BIANCO */
     text-decoration: none; display: flex; align-items: center; gap: 0.75rem;
 }
-header:not(.toolbar) .logo img.header-logo-img {
+header .logo img.header-logo-img { /* Dimensione immagine logo */
     height: 35px; width: auto; vertical-align: middle;
 }
-/* Assicurati che la NAV dentro l'header community mantenga lo sfondo primario */
-header:not(.toolbar) nav {
-    background-color: inherit; /* Eredita lo sfondo viola dall'header */
-}
-header:not(.toolbar) nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
-header:not(.toolbar) nav ul li { margin-left: 1.5rem; }
-header:not(.toolbar) nav ul li a { color: var(--text-light); text-decoration: none; transition: color 0.3s ease; padding: 0.5rem 0; /* Aggiunto padding verticale per allineamento? */ }
-header:not(.toolbar) nav ul li a:hover { color: var(--accent); }
-header:not(.toolbar) .user-actions { display: flex; gap: 1rem; align-items: center; }
+/* Rimuoviamo lo stile specifico per lo span, il testo è tutto bianco ora */
+/* header .logo span { color: var(--accent); } */
 
+header nav {
+    background-color: transparent; /* Rende trasparente la nav per mostrare lo sfondo viola dell'header */
+}
+header nav ul { display: flex; list-style: none; padding: 0; margin: 0; }
+header nav ul li { margin-left: 1.5rem; }
+header nav ul li a {
+    color: var(--text-light) !important; /* FORZA TESTO LINK NAV BIANCO */
+    text-decoration: none; transition: color 0.3s ease;
+    padding: 0.5rem 0;
+}
+header nav ul li a:hover { color: var(--accent) !important; /* Colore hover viola chiaro */ }
+header .user-actions { display: flex; gap: 1rem; align-items: center; }
+/* Stili bottoni specifici nell'header community sono in buttons.css, ma assicuriamoci che il colore testo per outline sia bianco */
+header .btn-outline {
+    color: var(--text-light) !important;
+    border-color: var(--text-light) !important;
+}
+header .btn-outline:hover {
+     background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ======================================== */
 /* Header Pagine Contenuto (Toolbar) */
+/* ======================================== */
 header.toolbar {
     background-color: var(--primary); color: var(--text-light); padding: 0 20px;
     height: 60px; display: flex; justify-content: space-between; align-items: center;
@@ -48,7 +67,9 @@ header.toolbar .token-icon { color: #facc15; margin-right: 5px; }
 header.toolbar #user-info { display: none; align-items: center; color: var(--text-light); font-weight: 600;}
 header.toolbar #username-display { margin-right: 15px; }
 
+/* ======================================== */
 /* Navigazione Pagine Contenuto */
+/* ======================================== */
 nav#main-nav {
     background-color: var(--card-bg); padding: 0 20px; height: 45px; position: sticky; top: 60px;
     z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.08); border-bottom: 1px solid var(--border);
@@ -58,24 +79,30 @@ nav#main-nav ul { list-style: none; padding: 0; margin: 0; display: flex; align-
 nav#main-nav ul li a { text-decoration: none; color: var(--secondary); font-weight: 600; padding: 10px 15px; border-radius: 4px; transition: background-color 0.2s, color 0.2s; font-size: 0.95rem; display: block; line-height: calc(45px - 20px); }
 nav#main-nav ul li a:hover, nav#main-nav ul li a.active { background-color: var(--secondary); color: var(--text-light); }
 
-/* Layout Griglia Pagina Community */
-main:not(.container) { max-width: 1400px; margin: 2rem auto; padding: 0 1rem; display: grid; grid-template-columns: 280px 1fr; gap: 2rem; }
+/* ======================================== */
+/* Layout Comuni e Specifici */
+/* ======================================== */
+main:not(.container) { /* Layout Pagina Community */
+     max-width: 1400px; margin: 2rem auto; padding: 0 1rem; display: grid; grid-template-columns: 280px 1fr; gap: 2rem;
+}
 main:not(.container) aside.sidebar { background-color: var(--card-bg); border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); padding: 1.5rem; position: sticky; top: calc(1rem + 64px); height: fit-content; max-height: calc(100vh - 8rem); overflow-y: auto; }
 main:not(.container) .main-content { display: flex; flex-direction: column; gap: 2rem; }
 
-/* Layout Pagine Contenuto */
-main.container section { padding: 0 0 2rem 0; border-bottom: 1px solid var(--border); }
+main.container section { /* Layout Pagine Contenuto */
+    padding: 0 0 2rem 0; border-bottom: 1px solid var(--border);
+}
 main.container section:last-of-type { border-bottom: none; padding-bottom: 1rem; }
 main.container h2 { color: var(--primary); border-bottom: 3px solid var(--secondary); padding-bottom: 0.6rem; margin: 3rem 0 1.8rem 0; font-size: 2rem; display: flex; align-items: center; }
 main.container h2:first-of-type { margin-top: 0; }
 main.container h2 i { margin-right: 12px; color: var(--secondary); font-size: 1.8rem; }
 main.container h3 { color: var(--secondary); font-size: 1.5rem; margin: 2rem 0 1rem 0; }
 
-/* Titolo Sezione */
 .section-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
 .section-title h2 { margin: 0; border: none; padding: 0; font-size: 1.5rem; }
 
-/* Footer */
+/* ======================================== */
+/* Footer (Comune) */
+/* ======================================== */
 footer { background-color: var(--primary); color: var(--text-light); padding: 3rem 1rem; margin-top: 3rem; }
 .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; }
 .footer-col h3 { font-size: 1.2rem; margin-bottom: 1.5rem; color: white; }
@@ -85,33 +112,36 @@ footer { background-color: var(--primary); color: var(--text-light); padding: 3r
 .footer-links a:hover { color: var(--accent); }
 .copyright { text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; font-size: 0.9rem; }
 
+/* ======================================== */
 /* Responsive Layout */
+/* ======================================== */
 @media (max-width: 1024px) {
     main:not(.container) { grid-template-columns: 1fr; }
     main:not(.container) aside.sidebar { position: static; margin-bottom: 2rem; max-height: none; overflow-y: visible; }
 }
 @media (max-width: 768px) {
+    /* Header Community su Mobile */
     header:not(.toolbar) { padding: 1rem; }
     header:not(.toolbar) .header-container { flex-direction: column; gap: 1rem; padding: 0; }
-    /* Applica lo sfondo viola anche alla nav su mobile nel contesto community */
-    header:not(.toolbar) nav { background-color: var(--primary); width: 100%; }
+    header:not(.toolbar) nav { background-color: var(--primary); width: 100%; } /* Mantiene sfondo viola */
     header:not(.toolbar) nav ul { margin-top: 1rem; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1rem; padding-bottom: 1rem;}
     header:not(.toolbar) nav ul li { margin-left: 0; }
     header:not(.toolbar) .user-actions { margin-top: 1rem; justify-content: center; padding-bottom: 1rem; }
 
+    /* Header Toolbar su Mobile */
     header.toolbar { height: auto; padding: 0.75rem 1rem; }
     header.toolbar .login-tools { flex-wrap: wrap; justify-content: flex-end; gap: 5px; }
     header.toolbar .toolbar-logo { margin-right: 10px; gap: 0.5rem;}
     header.toolbar .toolbar-logo img { max-height: 30px; }
     header.toolbar .toolbar-logo .logo-text { font-size: 1rem; }
 
-    /* Assicura che la nav delle pagine contenuto mantenga il suo stile */
+    /* Nav Contenuti su Mobile */
     nav#main-nav { background-color: var(--card-bg); top: auto; }
     nav#main-nav ul { justify-content: center; overflow-x: auto; gap: 5px; }
-    nav#main-nav ul li a { padding: 6px 10px; font-size: 0.9rem; color: var(--secondary); /* Ripristina colore link */ }
-     nav#main-nav ul li a:hover, nav#main-nav ul li a.active { background-color: var(--secondary); color: var(--text-light); }
+    nav#main-nav ul li a { padding: 6px 10px; font-size: 0.9rem; color: var(--secondary); }
+    nav#main-nav ul li a:hover, nav#main-nav ul li a.active { background-color: var(--secondary); color: var(--text-light); }
 
-
+    /* Main Layout su Mobile */
     main { margin-top: 1rem; }
     main.container h2 { font-size: 1.7rem; margin-top: 2.5rem;}
     main.container h2 i { font-size: 1.5rem; }
