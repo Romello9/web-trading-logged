@@ -3,26 +3,537 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test Header Logo</title>
-    <!-- Link ai CSS necessari -->
-    <link rel="stylesheet" href="css/base.css">   <!-- Carica le variabili colore -->
-    <link rel="stylesheet" href="css/layout.css"> <!-- Carica lo stile dell'header viola/bianco -->
-    <!-- Il CSS di debug è stato rimosso, se ti serve ancora puoi decommentarlo -->
-    <!-- <link rel="stylesheet" href="css/debug-style.css"> -->
+    <title>TraderGrowth Community Dashboard</title>
+    <!-- CSS Fondamentali -->
+    <link rel="stylesheet" href="css/base.css">      <!-- Definizioni colori/variabili base -->
+    <link rel="stylesheet" href="css/layout.css">    <!-- Stili Layout (Header viola/bianco qui!) -->
+
+    <!-- CSS Specifici Pagina/Componenti -->
+    <link rel="stylesheet" href="css/style.css">     <!-- Stili specifici Community Page (applicati DOPO layout) -->
+    <link rel="stylesheet" href="css/buttons.css">   <!-- Stili bottoni -->
+    <link rel="stylesheet" href="css/sidebar.css">   <!-- Stili sidebar community -->
+    <link rel="stylesheet" href="css/market.css">    <!-- Stili market -->
+    <link rel="stylesheet" href="css/modules.css">   <!-- Stili moduli -->
+    <link rel="stylesheet" href="css/growth-path.css"> <!-- Stili percorso crescita -->
+    <link rel="stylesheet" href="css/community.css"> <!-- Stili discussioni community -->
+    <link rel="stylesheet" href="css/tools.css">     <!-- Stili strumenti -->
+    <link rel="stylesheet" href="css/tabs.css">      <!-- Stili tabs -->
+
+    <!-- Libreria Icone (Esempio: Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
-    <header> <!-- Header SENZA classe .toolbar -->
-        <div class="header-container">
-         <a href="#" class="logo">
-            <img src="assets/logo.png" alt="TraderGrowth Logo" class="header-logo-img">
-            TraderGrowth <!-- Questo testo sarà bianco grazie a layout.css -->
-        </a>
-            <!-- Nessun'altra navigazione o bottone per semplicità -->
+
+    <!-- Header (SENZA classe .toolbar per stile viola/bianco da layout.css) -->
+    <header>
+        <div class="header-container"> <!-- Usa container da style.css -->
+            <a href="#" class="logo"> <!-- Classe .logo per testo bianco da layout.css -->
+                <img src="assets/logo.png" alt="TraderGrowth Logo" class="header-logo-img"> <!-- Classe da style.css/layout.css -->
+                TraderGrowth <!-- Testo bianco grazie a layout.css -->
+            </a>
+            <nav> <!-- Navigazione header da style.css -->
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Corsi</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Strumenti</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions"> <!-- Azioni utente da style.css -->
+                <!-- Bottoni Login/Signup (gestiti da JS) -->
+                <button id="community-login-btn" class="btn btn-outline">Accedi</button> <!-- Usa classi da style.css/buttons.css -->
+                <button id="community-signup-btn" class="btn btn-primary">Registrati</button> <!-- Usa classi da style.css/buttons.css -->
+                <!-- Info Utente (gestite da JS) -->
+                <div id="community-user-info" style="display: none; align-items: center; gap: 1rem; color: var(--text-light);">
+                    <span id="community-username-display" style="font-weight: 600;"></span>
+                    <button id="community-wallet-btn" class="btn wallet-btn" style="background-color: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.5);">
+                        <i class="fas fa-wallet"></i> Wallet
+                    </button>
+                    <button id="community-logout-btn" class="btn btn-outline" style="border-color: #fca5a5; color:#fca5a5;">Logout</button>
+                </div>
+            </div>
         </div>
     </header>
 
-    <h1>Contenuto Pagina Test</h1>
-    <p>Questa pagina serve solo a testare lo stile dell'header e del logo.</p>
+    <!-- Main Content Layout (da style.css) -->
+    <main>
+        <!-- Sidebar (da style.css e sidebar.css) -->
+        <aside class="sidebar">
+            <div class="user-profile"> <!-- Da sidebar.css -->
+                <div class="avatar">M</div> <!-- Da sidebar.css, aggiornato da JS -->
+                <div>
+                    <h3>Marco Rossi</h3> <!-- Da sidebar.css, aggiornato da JS -->
+                    <p>Membro Principiante</p>
+                </div>
+            </div>
+
+            <div class="progress-section"> <!-- Da sidebar.css -->
+                <div class="progress-title">
+                    <span>Progresso Percorso</span>
+                    <span>35%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-value" style="width: 35%;"></div>
+                </div>
+            </div>
+
+            <ul class="nav-menu"> <!-- Da sidebar.css, gestito da JS -->
+                <li><a href="#" class="active" data-section="dashboard"><i class="fas fa-tachometer-alt fa-fw"></i> Dashboard</a></li>
+                <li><a href="#" data-section="markets"><i class="fas fa-chart-line fa-fw"></i> Mercati</a></li>
+                <li><a href="#" data-section="learning"><i class="fas fa-book-open fa-fw"></i> Moduli Apprendimento</a></li>
+                <li><a href="#" data-section="growth"><i class="fas fa-road fa-fw"></i> Percorso Crescita</a></li>
+                <li><a href="#" data-section="community"><i class="fas fa-users fa-fw"></i> Discussioni</a></li>
+                <li><a href="#" data-section="tools"><i class="fas fa-tools fa-fw"></i> Strumenti Utili</a></li>
+            </ul>
+        </aside>
+
+        <!-- Contenuto Principale (da style.css) -->
+        <div class="main-content">
+
+            <!-- Sezione Dashboard (Visibile di default) -->
+            <section id="dashboard-content" class="page-section">
+                 <div class="section-title"> <!-- Da style.css -->
+                     <h2>Dashboard</h2>
+                     <!-- Eventuali azioni -->
+                 </div>
+                 <p>Benvenuto nella tua dashboard personalizzata TraderGrowth!</p>
+
+                 <!-- Esempio inclusione widget mercati qui -->
+                 <div class="market-dashboard section"> <!-- Usa market.css e classe .section da style.css -->
+                     <div class="section-title">
+                        <h3>Mercati Principali</h3>
+                     </div>
+                      <div class="tabs"> <!-- Da style.css / tabs.css -->
+                         <div class="tab active" data-market-filter="all">Tutti</div>
+                         <div class="tab" data-market-filter="crypto">Crypto</div>
+                         <div class="tab" data-market-filter="stocks">Azioni</div>
+                         <div class="tab" data-market-filter="forex">Forex</div>
+                     </div>
+                     <div class="market-grid"> <!-- Da market.css -->
+                         <!-- Esempio card mercato 1 -->
+                         <div class="market-card">
+                            <div class="market-header">
+                                <div class="market-name">
+                                    <div class="market-icon"><i class="fab fa-bitcoin"></i></div>
+                                    <div>
+                                        <strong>Bitcoin</strong>
+                                        <div>BTC/USD</div>
+                                    </div>
+                                </div>
+                                <span class="badge">Crypto</span> <!-- Da style.css -->
+                            </div>
+                            <div class="market-price">$65,432.10</div>
+                            <div class="market-change positive">
+                                <i class="fas fa-arrow-up"></i> +2.5% (24h)
+                            </div>
+                            <div class="chart-container">
+                                <svg class="chart-line" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="var(--success)" stroke-width="1" points="0,20 10,15 20,25 30,10 40,18 50,12 60,22 70,17 80,28 90,20 100,25"></polyline></svg>
+                            </div>
+                        </div>
+                         <!-- Esempio card mercato 2 -->
+                         <div class="market-card">
+                            <div class="market-header">
+                                <div class="market-name">
+                                    <div class="market-icon"><i class="fab fa-ethereum"></i></div>
+                                    <div>
+                                        <strong>Ethereum</strong>
+                                        <div>ETH/USD</div>
+                                    </div>
+                                </div>
+                                <span class="badge">Crypto</span>
+                            </div>
+                            <div class="market-price">$3,510.50</div>
+                            <div class="market-change negative">
+                                <i class="fas fa-arrow-down"></i> -1.2% (24h)
+                            </div>
+                            <div class="chart-container">
+                               <svg class="chart-line" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="var(--danger)" stroke-width="1" points="0,10 10,15 20,5 30,20 40,12 50,18 60,8 70,13 80,2 90,10 100,5"></polyline></svg>
+                            </div>
+                        </div>
+                        <!-- Altre card mercato... -->
+                     </div>
+                 </div>
+                 <!-- Altri contenuti della dashboard -->
+                 <div class="section">
+                    <div class="section-title">
+                        <h3>Prossimi Moduli</h3>
+                    </div>
+                    <p>Continua il tuo percorso di apprendimento.</p>
+                     <!-- ... -->
+                 </div>
+            </section>
+
+            <!-- Sezione Mercati (Nascosta di default, gestita da JS) -->
+            <section id="markets-content" class="page-section" style="display: none;">
+                <div class="section-title"><h2>Mercati</h2></div>
+                 <div class="market-dashboard section"> <!-- Usa market.css -->
+                     <div class="tabs"> <!-- Da style.css / tabs.css -->
+                         <div class="tab active" data-market-filter="all">Tutti</div>
+                         <div class="tab" data-market-filter="crypto">Crypto</div>
+                         <div class="tab" data-market-filter="stocks">Azioni</div>
+                         <div class="tab" data-market-filter="forex">Forex</div>
+                     </div>
+                     <div class="market-grid"> <!-- Da market.css -->
+                         <p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">Caricamento mercati... (Contenuto simulato)</p>
+                         <!-- Qui verrebbero caricate dinamicamente le card mercato -->
+                          <div class="market-card">
+                            <div class="market-header">
+                                <div class="market-name">
+                                    <div class="market-icon"><i class="fas fa-dollar-sign"></i></div>
+                                    <div>
+                                        <strong>EUR/USD</strong>
+                                        <div>Forex</div>
+                                    </div>
+                                </div>
+                                <span class="badge">Forex</span>
+                            </div>
+                            <div class="market-price">1.0850</div>
+                            <div class="market-change positive">
+                                <i class="fas fa-arrow-up"></i> +0.15% (24h)
+                            </div>
+                            <div class="chart-container">
+                                <svg class="chart-line" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="var(--success)" stroke-width="1" points="0,15 10,18 20,16 30,20 40,22 50,19 60,25 70,23 80,28 90,26 100,30"></polyline></svg>
+                            </div>
+                        </div>
+                          <div class="market-card">
+                            <div class="market-header">
+                                <div class="market-name">
+                                    <div class="market-icon"><i class="fas fa-building"></i></div>
+                                    <div>
+                                        <strong>Apple Inc.</strong>
+                                        <div>AAPL</div>
+                                    </div>
+                                </div>
+                                <span class="badge">Azioni</span>
+                            </div>
+                            <div class="market-price">$195.30</div>
+                            <div class="market-change negative">
+                                <i class="fas fa-arrow-down"></i> -0.8% (24h)
+                            </div>
+                            <div class="chart-container">
+                                <svg class="chart-line" viewBox="0 0 100 30" preserveAspectRatio="none"><polyline fill="none" stroke="var(--danger)" stroke-width="1" points="0,25 10,20 20,22 30,15 40,18 50,12 60,16 70,10 80,14 90,8 100,12"></polyline></svg>
+                            </div>
+                        </div>
+                     </div>
+                 </div>
+            </section>
+
+            <!-- Sezione Moduli Apprendimento (Nascosta di default, gestita da JS) -->
+            <section id="learning-content" class="page-section" style="display: none;">
+                <div class="section-title"><h2>Moduli Apprendimento</h2></div>
+                <div class="learning-modules section"> <!-- Usa modules.css -->
+                    <div class="module-grid"> <!-- Da modules.css -->
+                       <!-- Esempio card modulo 1 -->
+                       <div class="module-card">
+                           <div class="module-image" style="background-color: #e0f2fe;">
+                               <i class="fas fa-chalkboard-teacher" style="font-size: 2.5rem; color: var(--secondary);"></i>
+                           </div>
+                           <div class="module-content">
+                               <span class="badge">Principiante</span>
+                               <h4 class="module-title">Introduzione all'Analisi Tecnica</h4>
+                               <p class="module-description">Impara le basi dei grafici a candela, trend, supporti e resistenze.</p>
+                               <div class="progress-small">
+                                   <div class="progress-bar-small"><div class="progress-value" style="width: 60%;"></div></div>
+                                   <span>60% Completato</span>
+                               </div>
+                           </div>
+                       </div>
+                        <!-- Esempio card modulo 2 -->
+                       <div class="module-card">
+                            <div class="module-image" style="background-color: #f3e8ff;">
+                               <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--primary);"></i>
+                           </div>
+                           <div class="module-content">
+                               <span class="badge">Intermedio</span>
+                               <h4 class="module-title">Psicologia del Trading</h4>
+                               <p class="module-description">Gestisci le emozioni e sviluppa la mentalità giusta per il successo.</p>
+                               <div class="progress-small">
+                                   <div class="progress-bar-small"><div class="progress-value" style="width: 15%;"></div></div>
+                                   <span>15% Completato</span>
+                               </div>
+                           </div>
+                       </div>
+                       <!-- Altre card modulo... -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sezione Percorso Crescita (Nascosta di default, gestita da JS) -->
+            <section id="growth-content" class="page-section" style="display: none;">
+                 <div class="section-title"><h2>Il Tuo Percorso di Crescita</h2></div>
+                 <div class="growth-path section"> <!-- Usa growth-path.css -->
+                     <div class="milestones"> <!-- Da growth-path.css -->
+                        <!-- Esempio milestone 1 -->
+                        <div class="milestone milestone-completed"> <!-- Da growth-path.css -->
+                            <div class="milestone-header">
+                                <h4 class="milestone-title">Benvenuto Trader!</h4>
+                                <span class="milestone-status status-completed">Completato</span>
+                            </div>
+                            <p class="milestone-subtitle">Primo accesso alla piattaforma</p>
+                            <div class="milestone-description">
+                                <p>Hai ufficialmente iniziato il tuo viaggio con TraderGrowth. Esplora la dashboard!</p>
+                            </div>
+                        </div>
+                         <!-- Esempio milestone 2 -->
+                         <div class="milestone milestone-inprogress">
+                            <div class="milestone-header">
+                                <h4 class="milestone-title">Fondamenta del Trading</h4>
+                                <span class="milestone-status status-inprogress">In Corso</span>
+                            </div>
+                            <p class="milestone-subtitle">Completa i moduli base</p>
+                             <div class="milestone-description">
+                                <p>Completa "Introduzione al Trading" e "Analisi Tecnica Base" per sbloccare il prossimo step.</p>
+                                <!-- Link ai moduli? -->
+                            </div>
+                        </div>
+                        <!-- Esempio milestone 3 -->
+                        <div class="milestone milestone-locked">
+                            <div class="milestone-header">
+                                <h4 class="milestone-title">Prima Operazione Virtuale</h4>
+                                <span class="milestone-status status-locked">Bloccato</span>
+                            </div>
+                            <p class="milestone-subtitle">Utilizza il simulatore di trading</p>
+                             <div class="milestone-description">
+                                <p>Metti in pratica ciò che hai imparato senza rischi.</p>
+                            </div>
+                        </div>
+                        <!-- Altri milestones... -->
+                     </div>
+                 </div>
+            </section>
+
+             <!-- Sezione Discussioni (Nascosta di default, gestita da JS) -->
+             <section id="community-content" class="page-section" style="display: none;">
+                 <div class="section-title"><h2>Discussioni Community</h2></div>
+                 <div class="community-section section"> <!-- Usa community.css -->
+                     <button class="btn btn-primary" style="margin-bottom: 1.5rem;"><i class="fas fa-plus"></i> Nuova Discussione</button>
+                     <div class="discussion-list"> <!-- Da community.css -->
+                        <!-- Esempio discussione 1 -->
+                        <div class="discussion-card">
+                            <div class="discussion-avatar" style="background-color: #10b981;">A</div> <!-- Colore casuale o basato su ID -->
+                            <div class="discussion-content">
+                                <div class="discussion-header">
+                                    <span class="discussion-author">Andrea Bianchi</span>
+                                    <span class="discussion-time">2 ore fa</span>
+                                </div>
+                                <div class="discussion-body">
+                                    <p>Ciao a tutti! Qualcuno ha esperienza con le strategie di breakout sul Forex? Consigli su timeframe?</p>
+                                </div>
+                                <div class="discussion-footer">
+                                    <div class="discussion-action"><i class="fas fa-thumbs-up"></i> <span>5</span></div>
+                                    <div class="discussion-action"><i class="fas fa-comment"></i> <span>3</span></div>
+                                    <div class="discussion-action"><i class="fas fa-share"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                         <!-- Esempio discussione 2 -->
+                         <div class="discussion-card">
+                            <div class="discussion-avatar" style="background-color: #f59e0b;">L</div>
+                            <div class="discussion-content">
+                                <div class="discussion-header">
+                                    <span class="discussion-author">Laura Verdi</span>
+                                    <span class="discussion-time">5 ore fa</span>
+                                </div>
+                                <div class="discussion-body">
+                                    <p>Sto studiando gli indicatori RSI e MACD. Come li combinate solitamente nelle vostre analisi?</p>
+                                </div>
+                                <div class="discussion-footer">
+                                    <div class="discussion-action"><i class="fas fa-thumbs-up"></i> <span>8</span></div>
+                                    <div class="discussion-action"><i class="fas fa-comment"></i> <span>6</span></div>
+                                    <div class="discussion-action"><i class="fas fa-share"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Altre discussioni... -->
+                     </div>
+                 </div>
+             </section>
+
+             <!-- Sezione Strumenti (Nascosta di default, gestita da JS) -->
+            <section id="tools-content" class="page-section" style="display: none;">
+                <div class="section-title"><h2>Strumenti Utili</h2></div>
+                 <div class="tools-section section"> <!-- Usa tools.css -->
+                     <div class="tools-grid"> <!-- Da tools.css -->
+                        <!-- Esempio card strumento 1 -->
+                        <a href="#" class="tool-card"> <!-- Rendere cliccabile? -->
+                            <div class="tool-icon"><i class="fas fa-calculator"></i></div>
+                            <h4>Calcolatore Posizione</h4>
+                            <p>Calcola la dimensione ideale per le tue operazioni basata sul rischio.</p>
+                        </a>
+                         <!-- Esempio card strumento 2 -->
+                         <a href="#" class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <h4>Calendario Economico</h4>
+                            <p>Rimani aggiornato sugli eventi macro che muovono i mercati.</p>
+                         </a>
+                          <!-- Esempio card strumento 3 -->
+                         <a href="#" class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-book"></i></div>
+                            <h4>Glossario Trading</h4>
+                            <p>Consulta i termini tecnici più comuni del settore.</p>
+                         </a>
+                          <!-- Esempio card strumento 4 -->
+                         <a href="#" class="tool-card">
+                            <div class="tool-icon"><i class="fas fa-newspaper"></i></div>
+                            <h4>Notizie Mercato</h4>
+                            <p>Leggi le ultime notizie finanziarie rilevanti.</p>
+                         </a>
+                        <!-- Altri strumenti... -->
+                     </div>
+                 </div>
+            </section>
+
+        </div> <!-- Fine .main-content -->
+    </main>
+
+    <!-- Footer (da style.css / layout.css) -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>TraderGrowth</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; opacity: 0.8;">La tua piattaforma per crescere nel mondo del trading.</p>
+                 <!-- Social links? -->
+            </div>
+            <div class="footer-col">
+                <h3>Link Utili</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Chi Siamo</a></li>
+                    <li><a href="#">Corsi Disponibili</a></li>
+                    <li><a href="#">Termini di Servizio</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Community</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Forum Discussioni</a></li>
+                    <li><a href="#">Canale Discord</a></li>
+                    <li><a href="#">Blog & Articoli</a></li>
+                     <li><a href="#">Eventi Live</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Supporto</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ - Domande Frequenti</a></li>
+                    <li><a href="#">Contatta il Supporto</a></li>
+                    <li><a href="#">Guida Introduttiva</a></li>
+                    <li><a href="#">Segnala un Problema</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2024 TraderGrowth. Tutti i diritti riservati. Piattaforma creata con scopo educativo.
+        </div>
+    </footer>
+
+    <!-- Modali (da style.css e gestite da JS) -->
+    <!-- Modale Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal-id="loginModal">&times;</span>
+            <h3 class="modal-title">Accedi a TraderGrowth</h3>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email-community">Email</label>
+                    <input type="email" id="login-email-community" required placeholder="tuamail@esempio.com">
+                </div>
+                <div class="form-group">
+                    <label for="login-password-community">Password</label>
+                    <input type="password" id="login-password-community" required placeholder="••••••••">
+                     <!-- Link password dimenticata? -->
+                </div>
+                <button type="submit" class="form-button primary-button">Accedi</button>
+            </form>
+            <div class="form-footer">
+                Non hai un account? <a href="#" class="switch-modal" data-from="loginModal" data-to="signupModal">Registrati ora</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modale Registrazione -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal-id="signupModal">&times;</span>
+            <h3 class="modal-title">Crea il tuo Account Gratuito</h3>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name-community">Nome Visualizzato</label>
+                    <input type="text" id="signup-name-community" required placeholder="Mario Rossi">
+                </div>
+                <div class="form-group">
+                    <label for="signup-email-community">Email</label>
+                    <input type="email" id="signup-email-community" required placeholder="tuamail@esempio.com">
+                </div>
+                <div class="form-group">
+                    <label for="signup-password-community">Password</label>
+                    <input type="password" id="signup-password-community" required placeholder="Min. 8 caratteri">
+                </div>
+                <div class="form-group">
+                    <label for="signup-confirm-community">Conferma Password</label>
+                    <input type="password" id="signup-confirm-community" required placeholder="Ripeti la password">
+                </div>
+                 <!-- Checkbox Termini e Condizioni? -->
+                <button type="submit" class="form-button primary-button">Registrati</button>
+            </form>
+            <div class="form-footer">
+                Hai già un account? <a href="#" class="switch-modal" data-from="signupModal" data-to="loginModal">Accedi</a>
+            </div>
+        </div>
+    </div>
+
+     <!-- Modale Wallet -->
+    <div id="walletModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" data-modal-id="walletModal">&times;</span>
+            <h3 class="modal-title">Il Tuo Wallet TRAD</h3>
+
+            <!-- Contenuto Wallet NON Connesso -->
+            <div id="wallet-connect-content">
+                <div style="text-align: center; margin-bottom: 1.5rem;">
+                     <i class="fas fa-wallet fa-3x" style="color: var(--primary); opacity: 0.5;"></i>
+                </div>
+                <p class="modal-description">Collega il tuo wallet (simulato) per gestire i token TRAD, visualizzare achievements e sbloccare funzionalità premium.</p>
+                <button id="connect-wallet-btn" class="form-button success-button">
+                    <i class="fas fa-link"></i> Collega Wallet Simulato
+                </button>
+                 <p class="modal-info-text">Questa è una simulazione per la demo.</p>
+            </div>
+
+            <!-- Contenuto Wallet Connesso -->
+            <div id="wallet-connected-content" style="display: none;">
+                <div class="token-amount">
+                    <i class="fas fa-coins" style="color: #facc15; font-size: 2rem; margin-right: 0.5rem; vertical-align: middle;"></i>
+                    <span id="wallet-token-count">0</span> TRAD
+                </div>
+                <div class="token-name">Token Guadagnati</div>
+
+                <div class="wallet-info">
+                    <strong>Indirizzo Wallet (Simulato):</strong>
+                    <div id="wallet-address" class="wallet-address">N/A</div>
+                </div>
+
+                <div class="wallet-achievements">
+                    <h3><i class="fas fa-trophy"></i> Achievements Sbloccati</h3>
+                    <div id="achievements-list">
+                       <div class="no-achievements">Collega il wallet per vedere i tuoi achievements!</div>
+                    </div>
+                </div>
+
+                <button id="disconnect-wallet-btn" class="form-button danger-button">
+                    <i class="fas fa-unlink"></i> Disconnetti Wallet
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Area Notifiche (da style.css, gestita da JS) -->
+    <div id="notification-area"></div>
+
+    <!-- Script JS -->
+    <script src="js/page-community.js"></script>
+    <!-- Eventuali altri script necessari -->
 
 </body>
 </html>
