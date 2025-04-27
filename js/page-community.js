@@ -1,250 +1,555 @@
-// --- START OF FILE js/page-community.js ---
+// Modulo JavaScript per page-community.js
 
-// Funzione Helper per aprire modal
-function openModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        console.log(`Opening modal: ${modalId}`);
-        modal.style.display = 'block';
-    } else {
-        console.warn(`Modal with ID "${modalId}" not found.`);
-    }
-}
-
-// Funzione Helper per chiudere modal
-function closeModal(modalId) {
-    const modal = document.getElementById(modalId);
-    if (modal) {
-        console.log(`Closing modal: ${modalId}`);
-        modal.style.display = 'none';
-    } else {
-        console.warn(`Modal with ID "${modalId}" not found.`);
-    }
-}
-
-// Funzione Helper per cambiare modal
-function switchModal(fromId, toId) {
-    closeModal(fromId);
-    openModal(toId);
-}
-
-
-// Attendi che il DOM sia caricato
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Community page DOM loaded. Setting up interactions...');
-
-    // --- Gestione Stato Login Simulato ---
-    const loginBtnHeader = document.getElementById('community-login-btn');
-    const signupBtnHeader = document.getElementById('community-signup-btn');
-    const walletBtnHeader = document.getElementById('community-wallet-btn'); // Seleziona bottone wallet per coerenza
-    const userInfoDisplayHeader = document.getElementById('community-user-info');
-    const usernameSpanHeader = document.getElementById('community-username-display');
-    const logoutBtnHeader = document.getElementById('community-logout-btn');
-
-    let isCommunityUserLoggedIn = false; // Stato iniziale: non loggato
-    let communityUsername = '';
-
-    function updateCommunityHeaderUI() {
-        if (isCommunityUserLoggedIn) {
-            if (loginBtnHeader) loginBtnHeader.style.display = 'none';
-            if (signupBtnHeader) signupBtnHeader.style.display = 'none';
-            if (userInfoDisplayHeader) userInfoDisplayHeader.style.display = 'flex';
-            if (usernameSpanHeader) usernameSpanHeader.textContent = `Ciao, ${communityUsername}`;
-            // Potremmo mostrare/nascondere walletBtn in base al login se ha senso
-            // if (walletBtnHeader) walletBtnHeader.style.display = 'inline-flex';
-        } else {
-            if (loginBtnHeader) loginBtnHeader.style.display = 'inline-flex';
-            if (signupBtnHeader) signupBtnHeader.style.display = 'inline-flex';
-            if (userInfoDisplayHeader) userInfoDisplayHeader.style.display = 'none';
-             // if (walletBtnHeader) walletBtnHeader.style.display = 'inline-flex'; // O nasconderlo?
-        }
-    }
-
-    function handleCommunityLogin(username) {
-        isCommunityUserLoggedIn = true;
-        communityUsername = username || 'Utente';
-        updateCommunityHeaderUI();
-        closeModal('loginModal');
-        // Aggiungeremo notifiche se necessario
-        alert(`Benvenuto ${communityUsername}! (Simulato)`);
-        // TODO: Salvare stato login in localStorage se si vuole persistenza
-    }
-
-    function handleCommunityLogout() {
-        isCommunityUserLoggedIn = false;
-        communityUsername = '';
-        updateCommunityHeaderUI();
-        alert('Logout effettuato (Simulato)');
-        // TODO: Rimuovere stato login da localStorage
-    }
-
-    // --- 1. Gestione Tabs Mercati ---
-    const tabsContainer = document.querySelector('.market-dashboard .tabs');
-    if (tabsContainer) {
-        const tabs = tabsContainer.querySelectorAll('.tab');
-        const marketGrid = document.querySelector('.market-dashboard .market-grid'); // Per futura logica di filtro
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                const filter = tab.dataset.marketFilter;
-                console.log(`Market tab activated: ${filter}`);
-                // TODO: Aggiungere logica per filtrare/ricaricare market-grid
-                if(marketGrid) {
-                    // Esempio semplice: cambia lo sfondo per feedback visivo
-                    marketGrid.style.backgroundColor = filter === 'crypto' ? 'lightblue' : (filter === 'forex' ? 'lightgreen' : 'transparent');
-                }
-            });
-        });
-        console.log('Market tabs listeners added.');
-    } else {
-        console.warn('Market tabs container not found.');
-    }
-
-    // --- 2. Gestione Bottoni Header (Apertura Modali) ---
-    if (loginBtnHeader) {
-        loginBtnHeader.addEventListener('click', (e) => { e.preventDefault(); openModal('loginModal'); });
-    } else { console.warn('Login button #community-login-btn not found.'); }
-    if (signupBtnHeader) {
-        signupBtnHeader.addEventListener('click', (e) => { e.preventDefault(); openModal('signupModal'); });
-    } else { console.warn('Signup button #community-signup-btn not found.'); }
-    if (walletBtnHeader) {
-        walletBtnHeader.addEventListener('click', (e) => { e.preventDefault(); openModal('walletModal'); });
-    } else { console.warn('Wallet button #community-wallet-btn not found.'); }
-    if (logoutBtnHeader) {
-        logoutBtnHeader.addEventListener('click', (e) => { e.preventDefault(); handleCommunityLogout(); });
-    } else { console.warn('Logout button #community-logout-btn not found.'); }
-
-    // Aggiorna UI header iniziale
-    updateCommunityHeaderUI();
-    console.log('Header button listeners added.');
-
-    // --- Gestione Chiusura/Switch Modali ---
-    document.querySelectorAll('.modal .close-modal').forEach(btn => {
-        const modalId = btn.dataset.modalId;
-        if(modalId) btn.addEventListener('click', () => closeModal(modalId));
-    });
-    document.querySelectorAll('.modal .switch-modal').forEach(link => {
-        const fromId = link.dataset.from;
-        const toId = link.dataset.to;
-        if(fromId && toId) link.addEventListener('click', (e) => { e.preventDefault(); switchModal(fromId, toId); });
-    });
-    document.querySelectorAll('.modal').forEach(modal => {
-        modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(modal.id); });
-    });
-    console.log('Modal close/switch listeners added.');
-
-    // --- 3. Gestione Sidebar Nav Menu ---
-    const sidebarMenu = document.querySelector('.sidebar .nav-menu');
-    const mainContentArea = document.getElementById('main-content-area'); // ID aggiunto all'HTML
-
-    if (sidebarMenu && mainContentArea) {
-        const sidebarLinks = sidebarMenu.querySelectorAll('a[data-section]');
-        const allSections = mainContentArea.querySelectorAll('.page-section'); // Seleziona tutte le sezioni
-
-        sidebarLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetSectionIdSuffix = link.dataset.section; // es: "dashboard", "growth-path"
-                const targetSectionId = `${targetSectionIdSuffix}-content`; // es: "dashboard-content"
-                console.log(`Sidebar link clicked. Target section: ${targetSectionId}`);
-
-                // Aggiorna stile link attivo
-                sidebarLinks.forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-
-                // Mostra/Nascondi sezioni contenuto
-                let sectionFound = false;
-                allSections.forEach(section => {
-                    if (section.id === targetSectionId) {
-                        section.style.display = 'block';
-                        sectionFound = true;
-                        console.log(`Showing section: #${section.id}`);
-                    } else {
-                        section.style.display = 'none';
-                    }
-                });
-
-                if (!sectionFound) {
-                    console.warn(`Content section #${targetSectionId} not found.`);
-                    // Fallback: mostra un messaggio o la dashboard
-                    const dashboardSection = document.getElementById('dashboard-content');
-                     if(dashboardSection) dashboardSection.style.display = 'block';
-                     // E/o mostra un messaggio di errore temporaneo
-                     // mainContentArea.innerHTML = `<p>Contenuto non trovato</p>`;
-                }
-            });
-        });
-        console.log('Sidebar menu navigation listeners added.');
-    } else {
-        console.warn('Sidebar navigation menu or main content area not found.');
-    }
-
-    // --- Gestione Login/Signup Form (Submit) ---
-    const loginForm = document.getElementById('login-form');
-    const signupForm = document.getElementById('signup-form');
-
-    if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Login form submitted (simulated)');
-            const emailInput = document.getElementById('login-email-community');
-            const username = emailInput?.value.split('@')[0] || 'Utente'; // Simula username dall'email
-            handleCommunityLogin(username); // Chiama la funzione di login simulato
-            loginForm.reset();
-        });
-    }
-     if (signupForm) {
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nameInput = document.getElementById('signup-name-community');
-            const username = nameInput?.value || 'NuovoUtente';
-            console.log('Signup form submitted (simulated)');
-            alert(`Registrazione per ${username} simulata!`); // Placeholder
-            closeModal('signupModal');
-            signupForm.reset();
-            // Login automatico dopo signup simulato
-            handleCommunityLogin(username);
-        });
-    }
-
-     // --- Gestione Wallet Connect/Disconnect (Simulazione Semplice) ---
-     const connectBtn = document.getElementById('connect-wallet-btn');
-     const disconnectBtn = document.getElementById('disconnect-wallet-btn');
-     const walletConnectedDiv = document.getElementById('wallet-connected-content');
-     const walletConnectDiv = document.getElementById('wallet-connect-content');
-
-     if (connectBtn && disconnectBtn && walletConnectedDiv && walletConnectDiv) {
-         let isWalletConnected = false; // Stato wallet simulato
-
-         function updateWalletModalView() {
-              walletConnectDiv.style.display = isWalletConnected ? 'none' : 'block';
-              walletConnectedDiv.style.display = isWalletConnected ? 'block' : 'none';
-         }
-
-         connectBtn.addEventListener('click', () => {
-             console.log('Connecting wallet (simulated)');
-             isWalletConnected = true;
-             updateWalletModalView();
-             alert('Wallet collegato (simulato)!');
-             // TODO: Integrare con wallet.js se necessario
-         });
-
-         disconnectBtn.addEventListener('click', () => {
-             console.log('Disconnecting wallet (simulated)');
-             isWalletConnected = false;
-             updateWalletModalView();
-             alert('Wallet disconnesso (simulato)!');
-              // TODO: Integrare con wallet.js se necessario
-         });
-
-         updateWalletModalView(); // Imposta vista iniziale
-         console.log('Wallet connect/disconnect listeners added.');
-     } else {
-         console.warn('Wallet modal buttons or content divs not found.');
-     }
-
-    console.log('Community page interactions ready.');
+// Gestione DOM al caricamento della pagina
+document.addEventListener('DOMContentLoaded', function() {
+    // Inizializzazione della UI
+    initUI();
+    
+    // Gestione delle sezioni della pagina
+    setupSectionNavigation();
+    
+    // Gestione dei tab per i mercati
+    setupMarketTabs();
+    
+    // Gestione delle modal
+    setupModals();
+    
+    // Inizializzazione dello stato dell'utente
+    checkUserStatus();
 });
-// --- END OF FILE js/page-community.js ---
+
+// Funzione di inizializzazione UI
+function initUI() {
+    console.log('TraderGrowth Dashboard initialized');
+}
+
+// Gestione della navigazione tra le sezioni
+function setupSectionNavigation() {
+    const sidebarLinks = document.querySelectorAll('.nav-menu a');
+    
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Rimuovi la classe active da tutti i link
+            sidebarLinks.forEach(item => item.classList.remove('active'));
+            
+            // Aggiungi la classe active al link cliccato
+            this.classList.add('active');
+            
+            // Ottieni la sezione target dal data-attribute
+            const targetSection = this.getAttribute('data-section');
+            
+            // Nascondi tutte le sezioni
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Mostra la sezione target
+            document.getElementById(`${targetSection}-content`).style.display = 'block';
+        });
+    });
+}
+
+// Gestione dei tab per i mercati
+function setupMarketTabs() {
+    const marketTabs = document.querySelectorAll('.tabs .tab');
+    
+    marketTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            // Rimuovi la classe active da tutti i tab
+            marketTabs.forEach(item => item.classList.remove('active'));
+            
+            // Aggiungi la classe active al tab cliccato
+            this.classList.add('active');
+            
+            // Qui potresti filtrare i mercati in base al tab selezionato
+            const filter = this.getAttribute('data-market-filter');
+            console.log(`Filtro mercati: ${filter}`);
+            
+            // Implementazione del filtro mercati (simulata)
+            filterMarkets(filter);
+        });
+    });
+}
+
+// Funzione per filtrare i mercati (simulata)
+function filterMarkets(filter) {
+    // Qui potresti implementare la logica di filtro reale
+    console.log(`Filtro mercati applicato: ${filter}`);
+}
+
+// ----- GESTIONE MODALI -----
+function setupModals() {
+    // Gestione pulsanti per aprire le modali
+    setupModalTriggers();
+    
+    // Gestione della chiusura delle modali
+    setupModalClosers();
+    
+    // Gestione dello switch tra modali
+    setupModalSwitchers();
+    
+    // Setup dei form di login e registrazione
+    setupAuthForms();
+    
+    // Setup della funzionalità del wallet
+    setupWalletFunctionality();
+}
+
+function setupModalTriggers() {
+    // Login button
+    const loginBtn = document.getElementById('community-login-btn');
+    if (loginBtn) {
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showModal('loginModal');
+        });
+    }
+    
+    // Signup button
+    const signupBtn = document.getElementById('community-signup-btn');
+    if (signupBtn) {
+        signupBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showModal('signupModal');
+        });
+    }
+    
+    // Wallet button
+    const walletBtn = document.getElementById('community-wallet-btn');
+    if (walletBtn) {
+        walletBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showModal('walletModal');
+        });
+    }
+}
+
+function setupModalClosers() {
+    // Gestione pulsanti di chiusura modali
+    const closeBtns = document.querySelectorAll('.close-modal');
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const modalId = this.getAttribute('data-modal-id');
+            hideModal(modalId);
+        });
+    });
+    
+    // Chiusura modale cliccando fuori dal contenuto
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideModal(this.id);
+            }
+        });
+    });
+    
+    // Chiusura modale con tasto ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const visibleModal = document.querySelector('.modal.show');
+            if (visibleModal) {
+                hideModal(visibleModal.id);
+            }
+        }
+    });
+}
+
+function setupModalSwitchers() {
+    // Gestione dei link per passare da una modale all'altra
+    const modalSwitchers = document.querySelectorAll('.switch-modal');
+    modalSwitchers.forEach(switcher => {
+        switcher.addEventListener('click', function(e) {
+            e.preventDefault();
+            const fromModal = this.getAttribute('data-from');
+            const toModal = this.getAttribute('data-to');
+            
+            hideModal(fromModal);
+            setTimeout(() => {
+                showModal(toModal);
+            }, 300); // Piccolo ritardo per una migliore UX
+        });
+    });
+}
+
+function showModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('show');
+        document.body.classList.add('modal-open');
+    }
+}
+
+function hideModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('show');
+        document.body.classList.remove('modal-open');
+    }
+}
+
+// ----- GESTIONE AUTENTICAZIONE -----
+function setupAuthForms() {
+    // Form di login
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email-community').value;
+            const password = document.getElementById('login-password-community').value;
+            
+            // Simulazione login
+            simulateLogin(email, password);
+        });
+    }
+    
+    // Form di registrazione
+    const signupForm = document.getElementById('signup-form');
+    if (signupForm) {
+        signupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('signup-name-community').value;
+            const email = document.getElementById('signup-email-community').value;
+            const password = document.getElementById('signup-password-community').value;
+            const confirmPassword = document.getElementById('signup-confirm-community').value;
+            
+            // Validazione base
+            if (password !== confirmPassword) {
+                showNotification('Le password non corrispondono', 'error');
+                return;
+            }
+            
+            // Simulazione registrazione
+            simulateSignup(name, email, password);
+        });
+    }
+    
+    // Pulsante logout
+    const logoutBtn = document.getElementById('community-logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            logoutUser();
+        });
+    }
+}
+
+function simulateLogin(email, password) {
+    // Simulazione di una richiesta login
+    console.log(`Tentativo di login con email: ${email}`);
+    
+    // Per simulazione, controlliamo solo che i campi non siano vuoti
+    if (!email || !password) {
+        showNotification('Inserisci email e password', 'error');
+        return;
+    }
+    
+    // Simuliamo un breve ritardo come in una vera chiamata API
+    showNotification('Login in corso...', 'info');
+    
+    setTimeout(() => {
+        // Simuliamo un login riuscito
+        const userData = {
+            name: email.split('@')[0], // Usiamo parte dell'email come nome utente
+            email: email,
+            isLoggedIn: true
+        };
+        
+        // Salva i dati utente
+        localStorage.setItem('tradergrowth_user', JSON.stringify(userData));
+        
+        // Aggiorna UI
+        updateUIForLoggedInUser(userData);
+        
+        // Chiudi modale e mostra notifica
+        hideModal('loginModal');
+        showNotification('Login effettuato con successo!', 'success');
+    }, 1000);
+}
+
+function simulateSignup(name, email, password) {
+    // Simulazione di una richiesta di registrazione
+    console.log(`Tentativo di registrazione per: ${name} (${email})`);
+    
+    // Per simulazione, controlliamo solo che i campi non siano vuoti
+    if (!name || !email || !password) {
+        showNotification('Compila tutti i campi', 'error');
+        return;
+    }
+    
+    // Simuliamo un breve ritardo come in una vera chiamata API
+    showNotification('Registrazione in corso...', 'info');
+    
+    setTimeout(() => {
+        // Simuliamo una registrazione riuscita
+        const userData = {
+            name: name,
+            email: email,
+            isLoggedIn: true
+        };
+        
+        // Salva i dati utente
+        localStorage.setItem('tradergrowth_user', JSON.stringify(userData));
+        
+        // Aggiorna UI
+        updateUIForLoggedInUser(userData);
+        
+        // Chiudi modale e mostra notifica
+        hideModal('signupModal');
+        showNotification('Registrazione completata con successo!', 'success');
+    }, 1000);
+}
+
+function logoutUser() {
+    // Rimuovi i dati utente
+    localStorage.removeItem('tradergrowth_user');
+    
+    // Aggiorna UI
+    updateUIForLoggedOutUser();
+    
+    // Mostra notifica
+    showNotification('Logout effettuato con successo', 'success');
+}
+
+function updateUIForLoggedInUser(userData) {
+    // Mostra nome utente
+    const usernameDisplay = document.getElementById('community-username-display');
+    if (usernameDisplay) {
+        usernameDisplay.textContent = userData.name;
+    }
+    
+    // Mostra div info utente
+    const userInfoDiv = document.getElementById('community-user-info');
+    if (userInfoDiv) {
+        userInfoDiv.style.display = 'flex';
+    }
+    
+    // Nascondi pulsanti login/signup
+    const loginBtn = document.getElementById('community-login-btn');
+    const signupBtn = document.getElementById('community-signup-btn');
+    if (loginBtn) loginBtn.style.display = 'none';
+    if (signupBtn) signupBtn.style.display = 'none';
+    
+    // Aggiorna avatar nella sidebar con iniziale del nome
+    const avatar = document.querySelector('.avatar');
+    if (avatar && userData.name) {
+        avatar.textContent = userData.name.charAt(0).toUpperCase();
+    }
+    
+    // Aggiorna nome utente nella sidebar
+    const sidebarName = document.querySelector('.user-profile h3');
+    if (sidebarName) {
+        sidebarName.textContent = userData.name;
+    }
+}
+
+function updateUIForLoggedOutUser() {
+    // Nascondi info utente
+    const userInfoDiv = document.getElementById('community-user-info');
+    if (userInfoDiv) {
+        userInfoDiv.style.display = 'none';
+    }
+    
+    // Mostra pulsanti login/signup
+    const loginBtn = document.getElementById('community-login-btn');
+    const signupBtn = document.getElementById('community-signup-btn');
+    if (loginBtn) loginBtn.style.display = 'inline-block';
+    if (signupBtn) signupBtn.style.display = 'inline-block';
+    
+    // Ripristina avatar e nome nella sidebar
+    const avatar = document.querySelector('.avatar');
+    if (avatar) {
+        avatar.textContent = 'M';
+    }
+    
+    const sidebarName = document.querySelector('.user-profile h3');
+    if (sidebarName) {
+        sidebarName.textContent = 'Marco Rossi';
+    }
+    
+    // Disconnetti anche il wallet se collegato
+    disconnectWallet();
+}
+
+// ----- GESTIONE WALLET -----
+function setupWalletFunctionality() {
+    // Pulsante per connettere il wallet
+    const connectWalletBtn = document.getElementById('connect-wallet-btn');
+    if (connectWalletBtn) {
+        connectWalletBtn.addEventListener('click', function() {
+            connectWallet();
+        });
+    }
+    
+    // Pulsante per disconnettere il wallet
+    const disconnectWalletBtn = document.getElementById('disconnect-wallet-btn');
+    if (disconnectWalletBtn) {
+        disconnectWalletBtn.addEventListener('click', function() {
+            disconnectWallet();
+        });
+    }
+    
+    // Controlla se il wallet è già collegato
+    checkWalletStatus();
+}
+
+function connectWallet() {
+    // Simula il collegamento del wallet
+    showNotification('Connessione al wallet in corso...', 'info');
+    
+    setTimeout(() => {
+        // Genera un indirizzo wallet fittizio
+        const walletAddress = '0x' + Array(40).fill(0).map(() => 
+            Math.floor(Math.random() * 16).toString(16)).join('');
+        
+        // Genera un numero casuale di token
+        const tokenCount = Math.floor(Math.random() * 1000);
+        
+        // Salva i dati del wallet
+        const walletData = {
+            address: walletAddress,
+            tokens: tokenCount,
+            connected: true,
+            achievements: generateRandomAchievements()
+        };
+        
+        localStorage.setItem('tradergrowth_wallet', JSON.stringify(walletData));
+        
+        // Aggiorna UI
+        updateWalletUI(walletData);
+        
+        // Mostra la notifica
+        showNotification('Wallet collegato con successo!', 'success');
+    }, 1500);
+}
+
+function disconnectWallet() {
+    // Rimuovi i dati del wallet
+    localStorage.removeItem('tradergrowth_wallet');
+    
+    // Aggiorna UI
+    const connectContent = document.getElementById('wallet-connect-content');
+    const connectedContent = document.getElementById('wallet-connected-content');
+    
+    if (connectContent) connectContent.style.display = 'block';
+    if (connectedContent) connectedContent.style.display = 'none';
+    
+    // Mostra notifica
+    showNotification('Wallet disconnesso', 'info');
+}
+
+function updateWalletUI(walletData) {
+    // Aggiorna UI del wallet
+    const connectContent = document.getElementById('wallet-connect-content');
+    const connectedContent = document.getElementById('wallet-connected-content');
+    
+    if (connectContent) connectContent.style.display = 'none';
+    if (connectedContent) connectedContent.style.display = 'block';
+    
+    // Aggiorna indirizzo wallet
+    const addressElement = document.getElementById('wallet-address');
+    if (addressElement) {
+        addressElement.textContent = walletData.address;
+    }
+    
+    // Aggiorna conteggio token
+    const tokenElement = document.getElementById('wallet-token-count');
+    if (tokenElement) {
+        tokenElement.textContent = walletData.tokens;
+    }
+    
+    // Aggiorna achievements
+    updateAchievements(walletData.achievements);
+}
+
+function updateAchievements(achievements) {
+    const achievementsList = document.getElementById('achievements-list');
+    if (!achievementsList) return;
+    
+    // Svuota la lista
+    achievementsList.innerHTML = '';
+    
+    if (achievements && achievements.length > 0) {
+        achievements.forEach(achievement => {
+            const achievementDiv = document.createElement('div');
+            achievementDiv.className = 'achievement-item';
+            achievementDiv.innerHTML = `
+                <div class="achievement-icon">🏆</div>
+                <div class="achievement-info">
+                    <div class="achievement-name">${achievement.name}</div>
+                    <div class="achievement-desc">${achievement.description}</div>
+                </div>
+            `;
+            achievementsList.appendChild(achievementDiv);
+        });
+    } else {
+        achievementsList.innerHTML = '<div class="no-achievements">Nessun achievement sbloccato.</div>';
+    }
+}
+
+function generateRandomAchievements() {
+    const achievements = [
+        {name: "Early Adopter", description: "Tra i primi 1000 membri della community"},
+        {name: "Hodler", description: "Mantieni token TRAD per 30+ giorni"},
+        {name: "Studente Stellare", description: "Completa 5 corsi con valutazione alta"},
+        {name: "Trader Promettente", description: "Completa il percorso base"}
+    ];
+    
+    // Seleziona casualmente 0-2 achievement
+    const count = Math.floor(Math.random() * 3);
+    const selectedAchievements = [];
+    
+    for (let i = 0; i < count; i++) {
+        const randomIndex = Math.floor(Math.random() * achievements.length);
+        selectedAchievements.push(achievements[randomIndex]);
+        // Rimuovi l'achievement selezionato per evitare duplicati
+        achievements.splice(randomIndex, 1);
+    }
+    
+    return selectedAchievements;
+}
+
+// ----- UTILITY FUNCTIONS -----
+function showNotification(message, type = 'info') {
+    const notificationArea = document.getElementById('notification-area');
+    if (!notificationArea) return;
+    
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.textContent = message;
+    
+    notificationArea.appendChild(notification);
+    
+    // Animazione di entrata
+    setTimeout(() => {
+        notification.classList.add('show');
+    }, 10);
+    
+    // Rimuovi la notifica dopo 3 secondi
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+function checkUserStatus() {
+    // Controlla se l'utente è già loggato
+    const userData = JSON.parse(localStorage.getItem('tradergrowth_user'));
+    if (userData && userData.isLoggedIn) {
+        updateUIForLoggedInUser(userData);
+    }
+}
+
+function checkWalletStatus() {
+    // Controlla se il wallet è già collegato
+    const walletData = JSON.parse(localStorage.getItem('tradergrowth_wallet'));
+    if (walletData && walletData.connected) {
+        updateWalletUI(walletData);
+    }
+}
