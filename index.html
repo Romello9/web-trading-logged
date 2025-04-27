@@ -4,22 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TraderGrowth Community Dashboard</title>
-    <!-- CSS Fondamentali -->
-    <link rel="stylesheet" href="css/base.css">      <!-- Definizioni colori/variabili base -->
-    <link rel="stylesheet" href="css/layout.css">    <!-- Stili Layout (Header viola/bianco qui!) -->
 
-    <!-- CSS Specifici Pagina/Componenti -->
-    <link rel="stylesheet" href="css/style.css">     <!-- Stili specifici Community Page (applicati DOPO layout) -->
-    <link rel="stylesheet" href="css/buttons.css">   <!-- Stili bottoni -->
-    <link rel="stylesheet" href="css/sidebar.css">   <!-- Stili sidebar community -->
-    <link rel="stylesheet" href="css/market.css">    <!-- Stili market -->
-    <link rel="stylesheet" href="css/modules.css">   <!-- Stili moduli -->
-    <link rel="stylesheet" href="css/growth-path.css"> <!-- Stili percorso crescita -->
-    <link rel="stylesheet" href="css/community.css"> <!-- Stili discussioni community -->
-    <link rel="stylesheet" href="css/tools.css">     <!-- Stili strumenti -->
-    <link rel="stylesheet" href="css/tabs.css">      <!-- Stili tabs -->
+    <!-- Link al CSS Consolidato -->
+    <link rel="stylesheet" href="css/style-consolidated.css">
 
-    <!-- Libreria Icone (Esempio: Font Awesome) -->
+    <!-- Libreria Icone (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
@@ -42,23 +31,23 @@
             </nav>
             <div class="user-actions"> <!-- Azioni utente da style.css -->
                 <!-- Bottoni Login/Signup (gestiti da JS) -->
-                <button id="community-login-btn" class="btn btn-outline">Accedi</button> <!-- Usa classi da style.css/buttons.css -->
-                <button id="community-signup-btn" class="btn btn-primary">Registrati</button> <!-- Usa classi da style.css/buttons.css -->
+                <button id="community-login-btn" class="btn btn-outline">Accedi</button> <!-- Classe btn-outline per stile bianco -->
+                <button id="community-signup-btn" class="btn btn-primary">Registrati</button> <!-- Classe btn-primary per stile viola chiaro -->
                 <!-- Info Utente (gestite da JS) -->
-                <div id="community-user-info" style="display: none; align-items: center; gap: 1rem; color: var(--text-light);">
-                    <span id="community-username-display" style="font-weight: 600;"></span>
-                    <button id="community-wallet-btn" class="btn wallet-btn" style="background-color: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255, 255, 255, 0.5);">
+                <div id="community-user-info"> <!-- Contenitore nascosto, mostrato da JS -->
+                    <span id="community-username-display"></span>
+                    <button id="community-wallet-btn" class="btn wallet-btn"> <!-- Classe wallet-btn per stile custom o outline -->
                         <i class="fas fa-wallet"></i> Wallet
                     </button>
-                    <button id="community-logout-btn" class="btn btn-outline" style="border-color: #fca5a5; color:#fca5a5;">Logout</button>
+                    <button id="community-logout-btn" class="btn btn-danger-outline">Logout</button> <!-- Classe btn-danger-outline per stile rosso -->
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Layout (da style.css) -->
+    <!-- Main Content Layout (da layout.css) -->
     <main>
-        <!-- Sidebar (da style.css e sidebar.css) -->
+        <!-- Sidebar (da sidebar.css) -->
         <aside class="sidebar">
             <div class="user-profile"> <!-- Da sidebar.css -->
                 <div class="avatar">M</div> <!-- Da sidebar.css, aggiornato da JS -->
@@ -88,12 +77,12 @@
             </ul>
         </aside>
 
-        <!-- Contenuto Principale (da style.css) -->
+        <!-- Contenuto Principale (da layout.css) -->
         <div class="main-content">
 
             <!-- Sezione Dashboard (Visibile di default) -->
             <section id="dashboard-content" class="page-section">
-                 <div class="section-title"> <!-- Da style.css -->
+                 <div class="section-title"> <!-- Da layout.css -->
                      <h2>Dashboard</h2>
                      <!-- Eventuali azioni -->
                  </div>
@@ -102,9 +91,9 @@
                  <!-- Esempio inclusione widget mercati qui -->
                  <div class="market-dashboard section"> <!-- Usa market.css e classe .section da style.css -->
                      <div class="section-title">
-                        <h3>Mercati Principali</h3>
+                        <h2>Mercati Principali</h2> <!-- Cambiato h3 in h2 per coerenza -->
                      </div>
-                      <div class="tabs"> <!-- Da style.css / tabs.css -->
+                      <div class="tabs"> <!-- Da style.css (Parte Modali/Form/Notifiche) -->
                          <div class="tab active" data-market-filter="all">Tutti</div>
                          <div class="tab" data-market-filter="crypto">Crypto</div>
                          <div class="tab" data-market-filter="stocks">Azioni</div>
@@ -121,7 +110,7 @@
                                         <div>BTC/USD</div>
                                     </div>
                                 </div>
-                                <span class="badge">Crypto</span> <!-- Da style.css -->
+                                <span class="badge">Crypto</span> <!-- Da style.css (Parte Modali/Form/Notifiche) -->
                             </div>
                             <div class="market-price">$65,432.10</div>
                             <div class="market-change positive">
@@ -157,7 +146,7 @@
                  <!-- Altri contenuti della dashboard -->
                  <div class="section">
                     <div class="section-title">
-                        <h3>Prossimi Moduli</h3>
+                        <h2>Prossimi Moduli</h2>
                     </div>
                     <p>Continua il tuo percorso di apprendimento.</p>
                      <!-- ... -->
@@ -168,7 +157,7 @@
             <section id="markets-content" class="page-section" style="display: none;">
                 <div class="section-title"><h2>Mercati</h2></div>
                  <div class="market-dashboard section"> <!-- Usa market.css -->
-                     <div class="tabs"> <!-- Da style.css / tabs.css -->
+                     <div class="tabs"> <!-- Da style.css (Parte Modali/Form/Notifiche) -->
                          <div class="tab active" data-market-filter="all">Tutti</div>
                          <div class="tab" data-market-filter="crypto">Crypto</div>
                          <div class="tab" data-market-filter="stocks">Azioni</div>
@@ -387,7 +376,7 @@
         </div> <!-- Fine .main-content -->
     </main>
 
-    <!-- Footer (da style.css / layout.css) -->
+    <!-- Footer (da layout.css) -->
     <footer>
         <div class="footer-container">
             <div class="footer-col">
@@ -428,7 +417,7 @@
         </div>
     </footer>
 
-    <!-- Modali (da style.css e gestite da JS) -->
+    <!-- Modali (stili da style-consolidated.css, gestite da JS) -->
     <!-- Modale Login -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
@@ -528,10 +517,10 @@
         </div>
     </div>
 
-    <!-- Area Notifiche (da style.css, gestita da JS) -->
+    <!-- Area Notifiche (stili da style-consolidated.css, gestita da JS) -->
     <div id="notification-area"></div>
 
-    <!-- Script JS -->
+    <!-- Script JS (Assicurati che il percorso sia corretto) -->
     <script src="js/page-community.js"></script>
     <!-- Eventuali altri script necessari -->
 
