@@ -187,25 +187,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     console.log('Modal close/switch listeners added.');
 
-    // --- 3. Gestione Sidebar Nav Menu ---
+       // --- 3. Gestione Sidebar Nav Menu ---
     const sidebarMenu = document.querySelector('.sidebar .nav-menu');
-    if (sidebarMenu) {
-        const sidebarLinks = sidebarMenu.querySelectorAll('a');
+    const mainContentArea = document.getElementById('main-content-area'); // Contenitore delle sezioni
+
+    if (sidebarMenu && mainContentArea) {
+        const sidebarLinks = sidebarMenu.querySelectorAll('a[data-section]'); // Seleziona solo link con data-section
+
         sidebarLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault(); // Impedisce il salto all'href="#"
-                // Rimuovi 'active' da tutti i link nella sidebar
+                const targetSectionId = link.dataset.section; // Ottieni l'ID della sezione dal data attribute
+                console.log(`Sidebar link clicked. Target section: ${targetSectionId}`);
+
+                // 1. Aggiorna stile link attivo
                 sidebarLinks.forEach(l => l.classList.remove('active'));
-                // Aggiungi 'active' al link cliccato
                 link.classList.add('active');
-                console.log(`Sidebar link activated: ${link.textContent.trim()}`);
-                // Qui potresti aggiungere logica per caricare/mostrare contenuto diverso
-                // nella .main-content area, ma per ora cambiamo solo lo stile.
+
+                // 2. Mostra/Nascondi sezioni contenuto
+                const allSections = mainContentArea.querySelectorAll('.page-section');
+                let sectionFound = false;
+                allSections.forEach(section => {
+                    // L'ID della sezione target (es. "dashboard-content") deve corrispondere a `targetSectionId + "-content"`
+                    if (section.id === `${targetSectionId}-content`) {
+                        section.style.display = 'block'; // Mostra la sezione corretta
+                        sectionFound = true;
+                        console.log(`Showing section: #${section.id}`);
+                    } else {
+                        section.style.display = 'none'; // Nascondi le altre
+                    }
+                });
+
+                if (!sectionFound) {
+                    console.warn(`Content section for ID "${targetSectionId}-content" not found.`);
+                    // Opzionale: mostra un messaggio di errore nell'area contenuti
+                    mainContentArea.innerHTML = `<p style='color:red; text-align:center; padding: 2rem;'>Contenuto per "${link.textContent.trim()}" non trovato.</p>`;
+                }
             });
         });
-        console.log('Sidebar menu listeners added.');
+        console.log('Sidebar menu navigation listeners added.');
     } else {
-        console.warn('Sidebar navigation menu not found.');
+        console.warn('Sidebar navigation menu or main content area not found.');
     }
 
     // --- Gestione Login/Signup Form (Simulazione Semplice) ---
