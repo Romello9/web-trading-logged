@@ -1,0 +1,44 @@
+/* --- START OF css/debug-style.css --- */
+:root {
+    --primary: #2e1065;
+    --text-light: #f8fafc;
+     /* Aggiungi altre variabili se strettamente necessarie per regole sotto */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: sans-serif; padding: 20px; } /* Stile base minimo */
+
+/* Stili Header Test */
+header {
+    background-color: var(--primary) !important;
+    color: var(--text-light) !important;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+header .header-container {
+    display: flex;
+    justify-content: space-between; /* Anche se c'è solo il logo */
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+header .logo {
+    font-size: 1.5rem; font-weight: bold;
+    color: var(--text-light) !important;
+    text-decoration: none; display: flex; align-items: center; gap: 0.75rem;
+}
+
+/* === REGOLA DI DEBUG PER IMMAGINE LOGO === */
+header .logo img.header-logo-img {
+    height: 40px !important; /* Altezza di test */
+    width: auto !important;
+    border: 5px solid lime !important; /* Bordo verde VISTOSO */
+    background-color: magenta !important; /* Sfondo magenta VISTOSO */
+    vertical-align: middle;
+    max-width: 200px !important; /* Limita larghezza massima per sicurezza */
+    box-sizing: border-box;
+}
+/* === FINE REGOLA DI DEBUG === */
+
+h1 { margin-top: 20px;}
+/* --- END OF css/debug-style.css --- */
