@@ -53,18 +53,57 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn('Market tabs container not found.');
     }
 
-    // --- 2. Gestione Bottoni Header (Apertura Modali) ---
-    const loginBtn = document.querySelector('header .user-actions .btn-outline'); // Assumendo sia Accedi
-    const signupBtn = document.querySelector('header .user-actions .btn-primary'); // Assumendo sia Registrati
-    const walletBtn = document.querySelector('header .user-actions .wallet-btn');
+     // --- 2. Gestione Bottoni Header (Apertura Modali) ---
+    const loginBtn = document.getElementById('community-login-btn'); // Usa ID
+    const signupBtn = document.getElementById('community-signup-btn'); // Usa ID
+    const walletBtn = document.getElementById('community-wallet-btn'); // Usa ID
+    const logoutBtn = document.getElementById('community-logout-btn'); // Aggiungi bottone logout
+    const userInfoDisplay = document.getElementById('community-user-info'); // Div info utente
+    const usernameSpan = document.getElementById('community-username-display'); // Span username
 
+    // Stato Login Simulato (semplice, solo per UI header)
+    let isCommunityUserLoggedIn = false; // Inizia come non loggato
+    let communityUsername = '';
+
+    function updateCommunityHeaderUI() {
+        if (isCommunityUserLoggedIn) {
+            if (loginBtn) loginBtn.style.display = 'none';
+            if (signupBtn) signupBtn.style.display = 'none';
+            if (userInfoDisplay) userInfoDisplay.style.display = 'flex'; // Mostra info utente
+            if (usernameSpan) usernameSpan.textContent = `Ciao, ${communityUsername}`;
+        } else {
+            if (loginBtn) loginBtn.style.display = 'inline-flex'; // Usa inline-flex se i bottoni sono flex
+            if (signupBtn) signupBtn.style.display = 'inline-flex';
+            if (userInfoDisplay) userInfoDisplay.style.display = 'none'; // Nascondi info utente
+        }
+    }
+
+    // Azione Login (Simulata) - chiamata dal form submit
+    function handleCommunityLogin(username) {
+        isCommunityUserLoggedIn = true;
+        communityUsername = username || 'Utente';
+        updateCommunityHeaderUI();
+        closeModal('loginModal');
+        // Potresti aggiungere una notifica qui se importi notificationHandler
+        alert(`Benvenuto ${communityUsername}! (Simulato)`);
+    }
+
+    // Azione Logout (Simulata)
+    function handleCommunityLogout() {
+        isCommunityUserLoggedIn = false;
+        communityUsername = '';
+        updateCommunityHeaderUI();
+        alert('Logout effettuato (Simulato)');
+    }
+
+    // Aggiungi listener ai bottoni usando gli ID
     if (loginBtn) {
         loginBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Previeni eventuale navigazione
+            e.preventDefault();
             openModal('loginModal');
         });
         console.log('Login button listener added.');
-    } else { console.warn('Login button not found in header.'); }
+    } else { console.warn('Login button #community-login-btn not found.'); }
 
     if (signupBtn) {
         signupBtn.addEventListener('click', (e) => {
@@ -72,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal('signupModal');
         });
          console.log('Signup button listener added.');
-    } else { console.warn('Signup button not found in header.'); }
+    } else { console.warn('Signup button #community-signup-btn not found.'); }
 
     if (walletBtn) {
         walletBtn.addEventListener('click', (e) => {
@@ -80,7 +119,44 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal('walletModal');
         });
         console.log('Wallet button listener added.');
-    } else { console.warn('Wallet button not found in header.'); }
+    } else { console.warn('Wallet button #community-wallet-btn not found.'); }
+
+     if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleCommunityLogout();
+        });
+        console.log('Logout button listener added.');
+    } else { console.warn('Logout button #community-logout-btn not found.'); }
+
+    // Aggiorna UI header iniziale
+    updateCommunityHeaderUI();
+
+    // Modifica gestione submit form per chiamare handleCommunityLogin
+     const loginForm = document.getElementById('login-form');
+     if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log('Login form submitted (simulated)');
+            const emailInput = document.getElementById('login-email-community');
+            handleCommunityLogin(emailInput?.value.split('@')[0]); // Passa username simulato
+            loginForm.reset(); // Pulisci form
+        });
+    }
+     // Gestione signup rimane semplice per ora
+     const signupForm = document.getElementById('signup-form');
+      if (signupForm) {
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+             const nameInput = document.getElementById('signup-name-community');
+            console.log('Signup form submitted (simulated)');
+             alert(`Registrazione per ${nameInput?.value || 'utente'} simulata!`); // Placeholder
+            closeModal('signupModal');
+            signupForm.reset();
+             // Potresti voler fare il login automatico dopo la registrazione
+             handleCommunityLogin(nameInput?.value);
+        });
+    }
 
     // --- Gestione Chiusura/Switch Modali ---
     // Aggiungi listener ai pulsanti 'X'
