@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test Header Logo</title>
-    <!-- Link SOLO al CSS di DEBUG -->
-    <link rel="stylesheet" href="css/debug-style.css">
+    <!-- Link ai CSS necessari -->
+    <link rel="stylesheet" href="css/base.css">   <!-- Carica le variabili colore -->
+    <link rel="stylesheet" href="css/layout.css"> <!-- Carica lo stile dell'header viola/bianco -->
+    <!-- Il CSS di debug è stato rimosso, se ti serve ancora puoi decommentarlo -->
+    <!-- <link rel="stylesheet" href="css/debug-style.css"> -->
 </head>
 <body>
     <header> <!-- Header SENZA classe .toolbar -->
         <div class="header-container">
          <a href="#" class="logo">
             <img src="assets/logo.png" alt="TraderGrowth Logo" class="header-logo-img">
-            TraderGrowth
+            TraderGrowth <!-- Questo testo sarà bianco grazie a layout.css -->
         </a>
             <!-- Nessun'altra navigazione o bottone per semplicità -->
         </div>
