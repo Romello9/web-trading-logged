@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TraderGrowth | Community Dashboard</title> <!-- Titolo specifico -->
+    <title>TraderGrowth | Community Dashboard</title>
     <!-- Link al CSS Esterno -->
     <link rel="stylesheet" href="css/style.css">
     <!-- Link a Font Awesome (se necessario per icone) -->
@@ -12,9 +12,9 @@
 <body>
     <header>
         <div class="header-container">
-         <a href="#" class="logo"> <!-- Logo con Immagine e Testo -->
+         <a href="#" class="logo">
             <img src="assets/logo.png" alt="TraderGrowth Logo" class="header-logo-img">
-            TraderGrowth <!-- Rimosso span superfluo -->
+            TraderGrowth
         </a>
             <nav> <!-- Navigazione principale Header -->
                 <ul>
@@ -27,15 +27,17 @@
                 </ul>
             </nav>
             <div class="user-actions"> <!-- Azioni Utente Header -->
-                <a href="#" class="btn btn-outline" id="community-login-btn">Accedi</a> <!-- ID Aggiunto -->
-                <a href="#" class="btn btn-primary" id="community-signup-btn">Registrati</a> <!-- ID Aggiunto -->
-                <a href="#" class="btn btn-outline wallet-btn" id="community-wallet-btn"> <!-- ID Aggiunto -->
+                <!-- Questi bottoni verranno nascosti da JS dopo il login -->
+                <a href="#" class="btn btn-outline" id="community-login-btn">Accedi</a>
+                <a href="#" class="btn btn-primary" id="community-signup-btn">Registrati</a>
+                <!-- Questo bottone è sempre visibile (o potremmo nasconderlo se non loggato?) -->
+                <a href="#" class="btn btn-outline wallet-btn" id="community-wallet-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
                     </svg>
                     Wallet
                 </a>
-                 <!-- Placeholder per utente loggato (sarà gestito da JS) -->
+                 <!-- Questo blocco verrà mostrato da JS dopo il login -->
                  <div id="community-user-info" style="display: none;">
                      <span id="community-username-display" style="margin-right: 15px; color: white; font-weight: 500;"></span>
                      <button id="community-logout-btn" class="btn btn-outline" style="border-color: var(--danger); color: var(--danger);">Logout</button>
@@ -65,38 +67,38 @@
             </div>
 
             <ul class="nav-menu">
-                <li><a href="#" class="active" data-section="dashboard"> <!-- Data attribute aggiunto -->
+                <li><a href="#" class="active" data-section="dashboard"> <!-- data-section aggiunto -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                     Dashboard
                 </a></li>
-                <li><a href="#" data-section="growth-path"> <!-- Data attribute aggiunto -->
+                <li><a href="#" data-section="growth-path"> <!-- data-section aggiunto -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                     Percorso di Crescita
                 </a></li>
-                 <li><a href="#" data-section="courses"> <!-- Data attribute aggiunto -->
+                 <li><a href="#" data-section="courses"> <!-- data-section aggiunto -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                     Corsi e Contenuti
                 </a></li>
-                 <li><a href="#" data-section="live-trading"> <!-- Data attribute aggiunto -->
+                 <li><a href="#" data-section="live-trading"> <!-- data-section aggiunto -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                     Trading Live
                 </a></li>
-                 <li><a href="#" data-section="analytics"> <!-- Data attribute aggiunto -->
+                 <li><a href="#" data-section="analytics"> <!-- data-section aggiunto -->
                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                     Analytics
                 </a></li>
-                <li><a href="#" data-section="support"> <!-- Data attribute aggiunto -->
+                <li><a href="#" data-section="support"> <!-- data-section aggiunto -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
                     Supporto
                 </a></li>
-                 <li><a href="#" data-section="settings"> <!-- Data attribute aggiunto -->
+                 <li><a href="#" data-section="settings"> <!-- data-section aggiunto -->
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                     Impostazioni
                 </a></li>
             </ul>
         </aside>
 
-        <div class="main-content" id="main-content-area"> <!-- ID Aggiunto per target JS -->
+        <div class="main-content" id="main-content-area"> <!-- ID Aggiunto -->
             <!-- Contenuto Dashboard (Visibile di default) -->
             <div class="page-section" id="dashboard-content">
                 <section class="market-dashboard">
@@ -112,25 +114,21 @@
                         <div class="tab" data-market-filter="indices">Indici</div>
                     </div>
                     <div class="market-grid">
-                        <!-- Card Mercati verranno aggiunte qui (o caricate dinamicamente) -->
-                        <div class="market-card">
-                             <div class="market-header"><div class="market-name"><div class="market-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg></div><div><strong>BTC/USD</strong><div>Bitcoin</div></div></div></div><div class="market-price">€51,243.68</div><div class="market-change positive"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/></svg>+2.45%</div><div class="chart-container"><svg class="chart-line" viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M0,70 Q40,60 70,50 T120,30 T200,10" fill="none" stroke="#10b981" stroke-width="2"/></svg></div>
-                        </div>
-                        <div class="market-card">
-                            <div class="market-header"><div class="market-name"><div class="market-icon" style="background-color: #eee;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#64748b" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div><div><strong>ETH/USD</strong><div>Ethereum</div></div></div></div><div class="market-price">€3,450.12</div><div class="market-change negative"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/></svg>-1.10%</div><div class="chart-container"><svg class="chart-line" viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M0,30 Q40,40 70,50 T120,70 T200,90" fill="none" stroke="#ef4444" stroke-width="2"/></svg></div>
-                        </div>
+                         <!-- Card Mercati -->
+                         <div class="market-card"><div class="market-header"><div class="market-name"><div class="market-icon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"/></svg></div><div><strong>BTC/USD</strong><div>Bitcoin</div></div></div></div><div class="market-price">€51,243.68</div><div class="market-change positive"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/></svg>+2.45%</div><div class="chart-container"><svg class="chart-line" viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M0,70 Q40,60 70,50 T120,30 T200,10" fill="none" stroke="#10b981" stroke-width="2"/></svg></div></div>
+                         <div class="market-card"><div class="market-header"><div class="market-name"><div class="market-icon" style="background-color: #eee;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#64748b" viewBox="0 0 16 16"><path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/></svg></div><div><strong>ETH/USD</strong><div>Ethereum</div></div></div></div><div class="market-price">€3,450.12</div><div class="market-change negative"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/></svg>-1.10%</div><div class="chart-container"><svg class="chart-line" viewBox="0 0 200 100" preserveAspectRatio="none"><path d="M0,30 Q40,40 70,50 T120,70 T200,90" fill="none" stroke="#ef4444" stroke-width="2"/></svg></div></div>
                     </div>
                 </section>
                  <section class="learning-modules">
                      <div class="section-title"><h2>Continua ad Imparare</h2><a href="#" class="btn btn-primary">Vedi Tutti i Corsi</a></div>
                      <div class="module-grid">
-                         <div class="module-card"><div class="module-image" style="background-image: url('https://via.placeholder.com/300x140/7c3aed/ffffff?text=Modulo+1');"></div><div class="module-content"><span class="badge">Mindset</span><h4 class="module-title">Psicologia del Trading: Il Fondamento</h4><p class="module-description">Comprendi e gestisci le emozioni per decisioni più razionali.</p><div class="progress-small"><div class="progress-bar-small"><div class="progress-value" style="width: 60%;"></div></div><span>60%</span></div></div></div>
-                         <div class="module-card"><div class="module-image" style="background-color: #10b981;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" viewBox="0 0 16 16"><path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/></svg></div><div class="module-content"><span class="badge">Analisi Tecnica</span><h4 class="module-title">Introduzione all'Analisi Tecnica</h4><p class="module-description">Impara a leggere i grafici e identificare pattern.</p><div class="progress-small"><div class="progress-bar-small"><div class="progress-value" style="width: 25%;"></div></div><span>25%</span></div></div></div>
+                        <div class="module-card"><div class="module-image" style="background-image: url('https://via.placeholder.com/300x140/7c3aed/ffffff?text=Modulo+1');"></div><div class="module-content"><span class="badge">Mindset</span><h4 class="module-title">Psicologia del Trading</h4><p class="module-description">Gestisci le emozioni.</p><div class="progress-small"><div class="progress-bar-small"><div class="progress-value" style="width: 60%;"></div></div><span>60%</span></div></div></div>
+                        <div class="module-card"><div class="module-image" style="background-color: #10b981;"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" viewBox="0 0 16 16"><path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z"/></svg></div><div class="module-content"><span class="badge">Analisi Tecnica</span><h4 class="module-title">Intro Analisi Tecnica</h4><p class="module-description">Leggi i grafici.</p><div class="progress-small"><div class="progress-bar-small"><div class="progress-value" style="width: 25%;"></div></div><span>25%</span></div></div></div>
                      </div>
                 </section>
             </div>
 
-            <!-- Contenuto Percorso di Crescita (Nascosto di default) -->
+            <!-- Contenuto Percorso di Crescita (Nascosto) -->
             <div class="page-section" id="growth-path-content" style="display: none;">
                 <section class="growth-path">
                     <div class="section-title"><h2>Il Tuo Percorso di Crescita</h2></div>
@@ -142,12 +140,12 @@
                </section>
             </div>
 
-             <!-- Altre sezioni nascoste (Corsi, Live, Analytics, Support, Settings) -->
-             <div class="page-section" id="courses-content" style="display: none;"> <section><h2>Corsi e Contenuti</h2><p>Elenco corsi...</p></section> </div>
-             <div class="page-section" id="live-trading-content" style="display: none;"> <section><h2>Trading Live</h2><p>Sessioni live...</p></section> </div>
-             <div class="page-section" id="analytics-content" style="display: none;"> <section><h2>Analytics</h2><p>Statistiche performance...</p></section> </div>
-             <div class="page-section" id="support-content" style="display: none;"> <section><h2>Supporto</h2><p>Contatta supporto...</p></section> </div>
-             <div class="page-section" id="settings-content" style="display: none;"> <section><h2>Impostazioni</h2><p>Impostazioni account...</p></section> </div>
+             <!-- Altre sezioni nascoste (Aggiungi qui il contenuto vero quando pronto) -->
+             <div class="page-section" id="courses-content" style="display: none;"> <section><h2>Corsi e Contenuti</h2><p>Elenco corsi e materiale didattico...</p></section> </div>
+             <div class="page-section" id="live-trading-content" style="display: none;"> <section><h2>Trading Live</h2><p>Programma sessioni live, registrazioni...</p></section> </div>
+             <div class="page-section" id="analytics-content" style="display: none;"> <section><h2>Analytics</h2><p>Le tue statistiche di performance...</p></section> </div>
+             <div class="page-section" id="support-content" style="display: none;"> <section><h2>Supporto</h2><p>Contatta il supporto o consulta le FAQ...</p></section> </div>
+             <div class="page-section" id="settings-content" style="display: none;"> <section><h2>Impostazioni</h2><p>Impostazioni del tuo account...</p></section> </div>
 
         </div> <!-- Fine .main-content -->
     </main>
